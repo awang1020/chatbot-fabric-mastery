@@ -208,5 +208,19 @@
     "slug": "dataflow-gen1-vs-gen2-microsoft-fabric",
     "title": "Dataflow Gen1 vs Gen2 : faut-il migrer maintenant ?",
     "url": "https://blog.antoinewang-tech.com/p/dataflow-gen1-vs-gen2-microsoft-fabric"
+  },
+  "2026-08-04_surge-protection-workspace-microsoft-fabric.md": {
+    "author": "Antoine Wang",
+    "date": "2026-08-04",
+    "slug": "surge-protection-workspace-microsoft-fabric",
+    "title": "Microsoft Fabric : Limiter les dépassements avec Surge Protection (+ démo)",
+    "url": "https://blog.antoinewang-tech.com/p/surge-protection-workspace-microsoft-fabric"
+  },
+  "2026-08-11_tenant-workspace-capacity-licence.md": {
+    "author": "Antoine Wang",
+    "date": "2026-08-11",
+    "slug": "tenant-workspace-capacity-licence",
+    "title": "Microsoft Fabric : Tout savoir sur les fondamentaux (Tenant, Workspace, Capacity)",
+    "url": "https://blog.antoinewang-tech.com/p/tenant-workspace-capacity-licence"
   }
 }

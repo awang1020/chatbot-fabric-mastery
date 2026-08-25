@@ -229,5 +229,12 @@
     "slug": "rls-dans-power-bi-ou-dans-onelake",
     "title": "Microsoft Fabric RLS : Settings in Power BI or OneLake Security ?",
     "url": "https://blog.antoinewang-tech.com/p/rls-dans-power-bi-ou-dans-onelake"
+  },
+  "2026-08-25_microsoft-fabric-data-domains.md": {
+    "author": "Antoine Wang",
+    "date": "2026-08-25",
+    "slug": "microsoft-fabric-data-domains",
+    "title": "Microsoft Fabric : Bonnes pratiques pour créer et gérer les domaines",
+    "url": "https://blog.antoinewang-tech.com/p/microsoft-fabric-data-domains"
   }
 }

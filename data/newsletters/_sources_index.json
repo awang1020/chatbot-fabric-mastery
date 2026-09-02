@@ -236,5 +236,12 @@
     "slug": "microsoft-fabric-data-domains",
     "title": "Microsoft Fabric : Bonnes pratiques pour créer et gérer les domaines",
     "url": "https://blog.antoinewang-tech.com/p/microsoft-fabric-data-domains"
+  },
+  "2026-09-01_microsoft-fabric-git-integration.md": {
+    "author": "Antoine Wang",
+    "date": "2026-09-01",
+    "slug": "microsoft-fabric-git-integration",
+    "title": "Git Integration Fabric : Versionner ses artefacts, stratégie de branches",
+    "url": "https://blog.antoinewang-tech.com/p/microsoft-fabric-git-integration"
   }
 }

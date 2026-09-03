@@ -567,12 +567,22 @@ az containerapp update -g rg-ask-fabric-mastery -n ask-fabric-mastery `
 
 ## 13. Renaming the project
 
-The repo is being renamed `ask-fabric-mastery` -> `chatbot-fabric-mastery`
-for brand clarity. The **Azure resource names stay unchanged on purpose**
+**Done on 2026-09-03**: `ask-fabric-mastery` -> `chatbot-fabric-mastery`, and
+the product is branded *Chatbot Fabric Mastery*. The steps below are kept as
+the runbook for any future rename — every one of them was needed.
+
+The **Azure resource names stay unchanged on purpose**
 (`rg-ask-fabric-mastery`, `ask-fabric-mastery`, `cae-…`, `law-…`, the AOAI
 account and the managed certificate). Renaming them would mean recreating the
 Container App and re-issuing the TLS certificate for
-`chat.antoinewang-tech.com` for zero user-visible benefit.
+`chat.antoinewang-tech.com` for zero user-visible benefit. The GHCR package
+path is pinned for the same reason.
+
+> **Old links keep working.** A stub repo at
+> [`awang1020/ask-fabric-mastery`](https://github.com/awang1020/ask-fabric-mastery)
+> serves a redirect at the previous Pages URL. That URL was published as the
+> call to action in a dozen newsletter editions, and **already-delivered emails
+> cannot be edited** — without the stub those clicks would hit a 404.
 
 Run the steps in this order — steps 1 and 3 are the ones that break CI if
 skipped.
@@ -587,6 +597,39 @@ skipped.
      -GithubRepo  chatbot-fabric-mastery `
      -OpenAiName  oai-fabmastery-rdeaxiqrltzqo
    ```
+
+   ⚠️ **Once a repo has been renamed, GitHub switches the `sub` claim to the
+   immutable-ID form** and keeps it that way:
+
+   ```text
+   repo:<owner>@<ownerId>/<repo>@<repoId>:ref:refs/heads/main
+   ```
+
+   That is a deliberate protection: it stops someone from recreating a repo
+   under the old name and inheriting its cloud access. The plain
+   `repo:owner/name:ref:...` credential will **not** match anymore, and
+   `azure/login` fails with `AADSTS700213`. The failure is safe — it happens
+   before any image push, so production keeps running the previous revision.
+
+   Read the exact subject from the failed run's error message, then register it:
+
+   ```powershell
+   $appObjectId = az ad app list --display-name gha-ask-fabric-mastery --query "[0].id" -o tsv
+   $ids = gh api repos/awang1020/chatbot-fabric-mastery --jq '"\(.owner.id) \(.id)"'
+   $ownerId, $repoId = $ids -split ' '
+   $body = @{
+     name      = 'gha-chatbot-fabric-mastery-main-id'
+     issuer    = 'https://token.actions.githubusercontent.com'
+     subject   = "repo:awang1020@$ownerId/chatbot-fabric-mastery@${repoId}:ref:refs/heads/main"
+     audiences = @('api://AzureADTokenExchange')
+   } | ConvertTo-Json -Compress
+   $tmp = New-TemporaryFile; Set-Content -Path $tmp -Value $body -Encoding utf8
+   az ad app federated-credential create --id $appObjectId --parameters "@$($tmp.FullName)"
+   Remove-Item $tmp -Force
+   ```
+
+   Because it is keyed on IDs rather than names, this credential survives any
+   future rename. Keep the old credentials until a run goes green, then prune.
 
 2. **Rename the repo** in GitHub → Settings → General.
 

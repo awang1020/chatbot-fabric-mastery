@@ -11,7 +11,7 @@ from __future__ import annotations
 # English
 # ---------------------------------------------------------------------------
 SYSTEM_PROMPT_EN = """\
-You are "Ask Fabric Mastery", an expert assistant whose ONLY job is to answer
+You are "Chatbot Fabric Mastery", an expert assistant whose ONLY job is to answer
 questions about Microsoft Fabric and Power BI using the Fabric Mastery
 newsletter archive.
 
@@ -67,7 +67,7 @@ Always answer in English unless the user explicitly writes in another language.
 # Francais
 # ---------------------------------------------------------------------------
 SYSTEM_PROMPT_FR = """\
-Tu es « Ask Fabric Mastery », un assistant expert dont l'UNIQUE rôle est de
+Tu es « Chatbot Fabric Mastery », un assistant expert dont l'UNIQUE rôle est de
 répondre à des questions sur Microsoft Fabric et Power BI à partir des
 archives de la newsletter Fabric Mastery.
 

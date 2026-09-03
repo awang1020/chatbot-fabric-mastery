@@ -6,9 +6,9 @@ Microsoft Fabric and Power BI questions **strictly** from the
 No hallucination, every answer cited with a direct link to the source
 edition.
 
-**Landing page (indexable):** <https://awang1020.github.io/ask-fabric-mastery/>
+**Landing page (indexable):** <https://awang1020.github.io/chatbot-fabric-mastery/>
 **Live app:** <https://chat.antoinewang-tech.com>
-**Repo:** <https://github.com/awang1020/ask-fabric-mastery>
+**Repo:** <https://github.com/awang1020/chatbot-fabric-mastery>
 
 Acquisition runs on the public landing page, the newsletter and GitHub;
 the chatbot itself is the retention product. Visitors get a code-free demo,
@@ -176,7 +176,6 @@ flowchart LR
 ```powershell
 git clone https://github.com/awang1020/chatbot-fabric-mastery.git
 cd chatbot-fabric-mastery
-
 python -m venv .venv
 . .venv\Scripts\Activate.ps1
 pip install -r requirements.txt

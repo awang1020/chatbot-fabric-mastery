@@ -1,4 +1,4 @@
-"""Ask Fabric Mastery — Streamlit chat UI (refreshed)."""
+"""Chatbot Fabric Mastery — Streamlit chat UI (refreshed)."""
 from __future__ import annotations
 
 import base64
@@ -64,11 +64,11 @@ logging.basicConfig(
 )
 
 st.set_page_config(
-    page_title="Fabric Mastery — Ask anything",
+    page_title="Chatbot Fabric Mastery — Microsoft Fabric & Power BI",
     page_icon="📘",
     layout="centered",
     initial_sidebar_state="collapsed",
-    menu_items={"About": "Ask Fabric Mastery — Grounded RAG on the Fabric Mastery newsletter archive."},
+    menu_items={"About": "Chatbot Fabric Mastery — Grounded RAG on the Fabric Mastery newsletter archive."},
 )
 
 # ---------------------------------------------------------------------------

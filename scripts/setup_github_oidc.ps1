@@ -109,7 +109,10 @@ $existingNames = @($existingCreds | ForEach-Object { $_.name })
 
 $creds = @(
     @{
-        name = 'gha-main-branch'
+        # Name carries the repo so a rename adds a NEW credential instead of
+        # silently skipping: the subject is what GitHub matches on, and a
+        # renamed repo mints tokens under its new name.
+        name = "gha-${GithubRepo}-main"
         subject = "repo:${GithubOwner}/${GithubRepo}:ref:refs/heads/main"
     }
     # NOTE: pull_request federated credential intentionally omitted.

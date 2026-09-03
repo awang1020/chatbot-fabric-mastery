@@ -1,4 +1,4 @@
-"""Centralized, env-driven configuration for Ask Fabric Mastery."""
+"""Centralized, env-driven configuration for Chatbot Fabric Mastery."""
 from __future__ import annotations
 
 from functools import lru_cache

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://awang1020.github.io/chatbot-fabric-mastery/sitemap.xml
+Sitemap: https://awang1020.github.io/ask-fabric-mastery/sitemap.xml

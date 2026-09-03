@@ -6,9 +6,9 @@ Microsoft Fabric and Power BI questions **strictly** from the
 No hallucination, every answer cited with a direct link to the source
 edition.
 
-**Landing page (indexable):** <https://awang1020.github.io/chatbot-fabric-mastery/>
+**Landing page (indexable):** <https://awang1020.github.io/ask-fabric-mastery/>
 **Live app:** <https://chat.antoinewang-tech.com>
-**Repo:** <https://github.com/awang1020/chatbot-fabric-mastery>
+**Repo:** <https://github.com/awang1020/ask-fabric-mastery>
 
 Acquisition runs on the public landing page, the newsletter and GitHub;
 the chatbot itself is the retention product. Visitors get a code-free demo,
@@ -609,8 +609,18 @@ skipped.
    git remote set-url origin https://github.com/awang1020/chatbot-fabric-mastery.git
    ```
 
-5. **Enable GitHub Pages** on `main` / `docs` folder so the landing page at
-   <https://awang1020.github.io/chatbot-fabric-mastery/> goes live.
+5. **Update the three files that hardcode the public URL.** GitHub Pages is
+   already enabled on `main` / `docs`, so the landing page URL changes with the
+   repo name. Leaving these pointing at the old name publishes a canonical tag
+   aimed at a 404, which is worse for SEO than having no canonical at all.
+   Replace `ask-fabric-mastery` with `chatbot-fabric-mastery` in:
+
+   - `docs/index.html` — `rel="canonical"`, `og:url`, `og:image`,
+     `twitter:image`, and the "Code source" footer link
+   - `docs/sitemap.xml` — `<loc>`
+   - `docs/robots.txt` — `Sitemap:`
+
+   Then confirm the new URL actually serves before announcing it anywhere.
 
 6. **Fix the newsletter backlinks.** Several published editions still point at
    `http://awang1020.github.io/ask-fabric-mastery` (old name, plain HTTP).

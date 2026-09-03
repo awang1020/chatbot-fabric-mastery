@@ -89,6 +89,7 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ''
 Write-Host 'Done. GitHub Actions is now rebuilding the index + image.' -ForegroundColor Green
-Write-Host 'Watch live  : gh run watch --repo awang1020/ask-fabric-mastery'
-Write-Host 'App URL     : https://awang1020.github.io/ask-fabric-mastery/'
+Write-Host 'Watch live  : gh run watch --repo awang1020/chatbot-fabric-mastery'
+Write-Host 'App URL     : https://chat.antoinewang-tech.com/'
+Write-Host 'Landing     : https://awang1020.github.io/chatbot-fabric-mastery/'
 Write-Host ''

@@ -21,7 +21,16 @@ from src.chat_engine import (
 from src.config import get_settings
 from src.i18n import t
 from src.indexer import build_index, index_stats, load_index
-from src.safety import check_rate_limit, require_password
+from src.safety import (
+    admin_mode_enabled,
+    can_ask_question,
+    check_rate_limit,
+    free_questions_left,
+    gate_enabled,
+    is_unlocked,
+    register_question,
+    unlock_form,
+)
 
 NEWSLETTER_URL = "https://blog.antoinewang-tech.com/"
 LOGO_PATH = Path(__file__).parent / "assets" / "logo_substack.webp"
@@ -381,6 +390,37 @@ section[data-testid="stSidebar"] [data-testid="stMetricValue"] {{
 .afm-confidence-medium {{ background: rgba(234,179,8,0.15); color: #854D0E; }}
 .afm-confidence-low {{ background: rgba(239,68,68,0.10); color: #B91C1C; }}
 
+/* ---- freemium demo badge + unlock panel ---- */
+.afm-demo-wrap {{
+    text-align: center;
+    margin: 1.5rem auto 0.5rem;
+}}
+.afm-demo-badge {{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(103,80,164,0.10);
+    color: #4A3B7A;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+}}
+.afm-unlock-title {{
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    color: #1D1D1F;
+    margin: 0.25rem 0 0.5rem;
+}}
+.afm-unlock-text {{
+    font-size: 0.93rem;
+    color: #6E6E73;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+}}
+
 /* ---- new-conversation bar ---- */
 .afm-newconv-label {{
     text-align: right;
@@ -575,6 +615,42 @@ def _render_confidence(confidence: str | None, language: str) -> None:
     )
 
 
+def _demo_notice(language: str) -> None:
+    """Show the remaining free questions while the visitor is still in demo mode."""
+    if not gate_enabled() or is_unlocked():
+        return
+    left = free_questions_left()
+    if left <= 0:
+        return
+    st.markdown(
+        f'<div class="afm-demo-wrap">'
+        f'<span class="afm-demo-badge">\u2728 {t(language, "demo_badge", n=left)}</span>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def _unlock_panel(language: str) -> None:
+    """Conversion step rendered once the free demo questions are used up."""
+    with st.container(border=True):
+        st.markdown(
+            f'<div class="afm-unlock-title">{t(language, "auth_title")}</div>'
+            f'<p class="afm-unlock-text">{t(language, "auth_subtitle")}</p>',
+            unsafe_allow_html=True,
+        )
+        if unlock_form(language, key="afm-unlock-form"):
+            st.rerun()
+        st.markdown(
+            f'<div class="afm-demo-wrap">'
+            f'<a class="afm-cta" href="{NEWSLETTER_URL}" target="_blank" rel="noopener">'
+            f'{t(language, "unlock_cta")}'
+            f'<span class="afm-cta-arrow">\u2192</span>'
+            f'</a>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+
 def _render_message(msg: dict, language: str) -> None:
     role = msg["role"]
     avatar = "🧑" if role == "user" else "📘"
@@ -629,40 +705,44 @@ def _sidebar(language: str) -> str:
         chunks = int(stats.get("chunks", 0) or 0)
         st.metric(t(language, "index_chunks"), chunks)
 
-        rebuild = chunks > 0
-        label = t(language, "rebuild_index") if rebuild else t(language, "build_index")
-        if st.button(label, use_container_width=True, type="primary"):
-            with st.spinner(t(language, "indexing")):
-                try:
-                    report = build_index(rebuild=rebuild)
-                except Exception as exc:  # noqa: BLE001 — UI boundary
-                    _report_error(language, exc)
-                else:
-                    if report.files_indexed == 0:
-                        st.warning(t(language, "no_files", dir=get_settings().data_dir))
+        # Re-embedding the whole corpus costs AOAI tokens, so the control is
+        # opt-in per deployment and never reachable from the public app.
+        if admin_mode_enabled():
+            rebuild = chunks > 0
+            label = t(language, "rebuild_index") if rebuild else t(language, "build_index")
+            if st.button(label, use_container_width=True, type="primary"):
+                with st.spinner(t(language, "indexing")):
+                    try:
+                        report = build_index(rebuild=rebuild)
+                    except Exception as exc:  # noqa: BLE001 — UI boundary
+                        _report_error(language, exc)
                     else:
-                        st.success(
-                            t(
-                                language,
-                                "index_built",
-                                files=report.files_indexed,
-                                chunks=report.nodes_created,
+                        if report.files_indexed == 0:
+                            st.warning(t(language, "no_files", dir=get_settings().data_dir))
+                        else:
+                            st.success(
+                                t(
+                                    language,
+                                    "index_built",
+                                    files=report.files_indexed,
+                                    chunks=report.nodes_created,
+                                )
                             )
-                        )
-                    refresh_sources_index()
-                    _reset_engine()
-                    st.rerun()
+                        refresh_sources_index()
+                        _reset_engine()
+                        st.rerun()
 
         if st.button(f"🗑  {t(language, 'clear_chat')}", use_container_width=True):
             st.session_state["messages"] = []
             _reset_engine()
             st.rerun()
 
-        st.divider()
-        with st.expander("Details", expanded=False):
-            st.caption(f"**{t(language, 'data_dir')}**")
-            st.code(str(stats["data_dir"]), language="text")
-            st.caption(f"**{t(language, 'collection')}**: `{stats['collection']}`")
+        if admin_mode_enabled():
+            st.divider()
+            with st.expander("Details", expanded=False):
+                st.caption(f"**{t(language, 'data_dir')}**")
+                st.code(str(stats["data_dir"]), language="text")
+                st.caption(f"**{t(language, 'collection')}**: `{stats['collection']}`")
 
     return st.session_state["language"]
 
@@ -704,28 +784,31 @@ def main() -> None:
     language = _sidebar(st.session_state["language"])
     _topbar(language)
 
-    # Shared-code gate (active only when APP_PASSWORD env var is set).
-    # The newsletter publishes the code; readers paste it once per session.
-    if not require_password(language):
-        return
-
     engine = _get_engine(language)
     n_sources = _stats_count()
+
+    # Freemium funnel: the demo runs code-free, the full experience needs the
+    # reader code published in the newsletter.
+    locked = not can_ask_question()
 
     # Read inputs first so the welcome screen only shows when there is genuinely
     # no history AND no prompt about to be processed this frame (typed input,
     # queued example-card click, or replayed pending question).
-    typed_prompt = st.chat_input(t(language, "ask_placeholder"))
-    incoming_prompt = typed_prompt or st.session_state.pop("pending_question", None)
+    typed_prompt = st.chat_input(
+        t(language, "unlock_placeholder" if locked else "ask_placeholder"),
+        disabled=locked,
+    )
+    queued_prompt = st.session_state.pop("pending_question", None)
+    incoming_prompt = None if locked else (typed_prompt or queued_prompt)
     has_history = bool(st.session_state["messages"])
     starting_conversation = has_history or bool(incoming_prompt)
 
     if not starting_conversation:
         _hero(language, n_sources)
-        if engine is not None:
-            _example_cards(language)
-        else:
+        if engine is None:
             st.info(t(language, "no_index"))
+        elif not locked:
+            _example_cards(language)
     else:
         _new_conversation_bar(language)
 
@@ -734,6 +817,10 @@ def main() -> None:
         _render_message(msg, language)
 
     if not incoming_prompt:
+        if locked:
+            _unlock_panel(language)
+        else:
+            _demo_notice(language)
         if not starting_conversation:
             st.markdown(
                 f'<div class="afm-footer">{t(language, "footer")}</div>',
@@ -747,6 +834,8 @@ def main() -> None:
     allowed, _retry = check_rate_limit(language)
     if not allowed:
         return
+
+    register_question()
 
     # Append + render user message
     user_msg = {"role": "user", "content": prompt}
@@ -807,6 +896,13 @@ def main() -> None:
     st.session_state["messages"].append(
         {"role": "assistant", "content": turn.answer, "sources": sources_payload, "confidence": turn.confidence}
     )
+
+    # Surface the unlock step right after the answer that consumed the last
+    # free question — the moment the visitor has just seen the value.
+    if can_ask_question():
+        _demo_notice(language)
+    else:
+        _unlock_panel(language)
 
 
 if __name__ == "__main__":

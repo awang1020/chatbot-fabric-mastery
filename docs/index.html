@@ -3,64 +3,409 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ask Fabric Mastery — accès à l'assistant</title>
-  <meta name="description" content="L'assistant RAG officiel de la newsletter Fabric Mastery — réponses sourcées sur Microsoft Fabric & Power BI." />
-  <link rel="canonical" href="https://chat.antoinewang-tech.com/" />
-  <meta http-equiv="refresh" content="0; url=https://chat.antoinewang-tech.com/" />
+
+  <!-- Base URL du site. Si vous branchez un domaine personnalise (docs/CNAME),
+       remplacez-la ici, dans docs/sitemap.xml et dans docs/robots.txt :
+       ce sont les 3 seuls endroits a changer. -->
+  <title>Assistant IA Microsoft Fabric — réponses sourcées sur Fabric &amp; Power BI</title>
+  <meta name="description" content="Chatbot IA spécialisé Microsoft Fabric et Power BI. Chaque réponse est sourcée et citée depuis les archives de la newsletter Fabric Mastery : OneLake, Direct Lake, capacité, Dataflow Gen2, sécurité RLS, gouvernance." />
+  <link rel="canonical" href="https://awang1020.github.io/chatbot-fabric-mastery/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="Antoine Wang" />
+  <meta name="theme-color" content="#6750A4" />
+
+  <!-- Open Graph : previsualisation LinkedIn / Slack / Teams -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fabric Mastery" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:url" content="https://awang1020.github.io/chatbot-fabric-mastery/" />
+  <meta property="og:title" content="Assistant IA Microsoft Fabric — réponses sourcées sur Fabric &amp; Power BI" />
+  <meta property="og:description" content="Posez vos questions Microsoft Fabric et Power BI. Réponses sourcées, citées, sans hallucination — construites sur les éditions de la newsletter Fabric Mastery." />
+  <meta property="og:image" content="https://awang1020.github.io/chatbot-fabric-mastery/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Assistant IA Microsoft Fabric — Fabric Mastery" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Assistant IA Microsoft Fabric — réponses sourcées" />
+  <meta name="twitter:description" content="Posez vos questions Microsoft Fabric et Power BI. Chaque réponse cite son édition source." />
+  <meta name="twitter:image" content="https://awang1020.github.io/chatbot-fabric-mastery/og-cover.png" />
   <style>
-    :root { color-scheme: light; }
-    html, body {
+    :root {
+      color-scheme: light;
+      --accent: #6750A4;
+      --ink: #1D1D1F;
+      --muted: #6E6E73;
+      --faint: #86868B;
+      --bg: #FAFAF7;
+      --line: rgba(0, 0, 0, 0.08);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
       margin: 0;
-      min-height: 100%;
-      background: #FAFAF7;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
-      color: #1D1D1F;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
-      text-align: center;
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+    a { color: var(--accent); }
+
+    header.top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line);
     }
-    h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.012em; margin: 0 0 0.75rem; }
-    p  { color: #6E6E73; margin: 0 0 1.5rem; max-width: 32rem; line-height: 1.5; }
-    a.btn {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      background: #6750A4;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      box-shadow: 0 1px 3px rgba(103,80,164,0.25);
+    .brand { display: flex; flex-direction: column; line-height: 1.15; }
+    .brand strong { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.012em; }
+    .brand span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--faint); font-weight: 500; }
+    nav a { margin-left: 1.25rem; font-size: 0.9rem; color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--ink); }
+    @media (max-width: 640px) { nav { display: none; } }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.7rem 1.3rem; border-radius: 999px;
+      background: var(--accent); color: #fff; text-decoration: none;
+      font-weight: 500; font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(103, 80, 164, 0.25);
+      transition: transform 120ms ease, box-shadow 120ms ease;
     }
-    a.btn:hover { opacity: 0.92; }
-    .spinner {
-      width: 22px; height: 22px; border-radius: 50%;
-      border: 2px solid rgba(0,0,0,0.1); border-top-color: #6750A4;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 1rem;
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(103, 80, 164, 0.28); }
+    .btn.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+
+    .hero { text-align: center; padding: 4rem 0 2.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; letter-spacing: -0.027em; line-height: 1.1; margin: 0 0 1rem; }
+    .hero p.lead { font-size: 1.1rem; color: var(--muted); max-width: 42rem; margin: 0 auto 1.75rem; }
+    .cta-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .trust { margin-top: 1.5rem; font-size: 0.85rem; color: var(--faint); }
+
+    section { padding: 3rem 0; border-top: 1px solid var(--line); }
+    h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 0.6rem; }
+    .section-lead { color: var(--muted); margin: 0 0 2rem; max-width: 46rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 1.25rem; transition: border-color 150ms ease, transform 150ms ease;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .card:hover { border-color: rgba(103, 80, 164, 0.4); transform: translateY(-2px); }
+    .card h3 { font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; line-height: 1.35; }
+    .card p { font-size: 0.9rem; color: var(--muted); margin: 0 0 0.85rem; }
+    .card a { font-size: 0.85rem; text-decoration: none; font-weight: 500; }
+    .card a:hover { text-decoration: underline; }
+
+    ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    ol.steps li { counter-increment: s; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem; }
+    ol.steps li::before {
+      content: counter(s); display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%; background: rgba(103, 80, 164, 0.12);
+      color: var(--accent); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.6rem;
+    }
+    ol.steps h3 { font-size: 0.98rem; margin: 0 0 0.35rem; }
+    ol.steps p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+    .demo { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .demo .q { padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+    .demo .q b { color: var(--faint); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.3rem; }
+    .demo .a { padding: 1.25rem; }
+    .badge { display: inline-block; padding: 0.28rem 0.7rem; border-radius: 999px; background: rgba(34, 197, 94, 0.12); color: #15803D; font-size: 0.78rem; font-weight: 500; margin-bottom: 0.8rem; }
+    .demo .a p { font-size: 0.95rem; margin: 0 0 1rem; }
+    .src { display: block; border: 1px solid var(--line); border-radius: 11px; padding: 0.7rem 0.9rem; margin-bottom: 0.5rem; text-decoration: none; color: inherit; }
+    .src:hover { border-color: rgba(103, 80, 164, 0.4); background: #FBFAFC; }
+    .src strong { display: block; font-size: 0.9rem; font-weight: 500; }
+    .src span { font-size: 0.78rem; color: var(--faint); }
+
+    .access { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .access div { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; }
+    .access div.hi { border-color: rgba(103, 80, 164, 0.35); }
+    .access h3 { margin: 0 0 0.75rem; font-size: 1.05rem; }
+    .access ul { margin: 0 0 1.25rem; padding-left: 1.1rem; font-size: 0.9rem; color: var(--muted); }
+    .access li { margin-bottom: 0.4rem; }
+
+    details { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.6rem; }
+    details summary { cursor: pointer; font-weight: 500; font-size: 0.97rem; }
+    details p { color: var(--muted); font-size: 0.92rem; margin: 0.75rem 0 0; }
+
+    footer { border-top: 1px solid var(--line); padding: 2.5rem 0; text-align: center; color: var(--faint); font-size: 0.85rem; }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 0.4rem; }
+    footer a:hover { color: var(--ink); }
   </style>
-  <script>
-    // JS fallback when the user agent ignores the meta refresh.
-    window.location.replace(
-      "https://chat.antoinewang-tech.com/"
-    );
-  </script>
 </head>
+
 <body>
-  <main>
-    <div class="spinner" aria-hidden="true"></div>
-    <h1>Ask Fabric Mastery</h1>
-    <p>Redirection vers l'assistant&hellip; si rien ne se passe, cliquez ci-dessous.</p>
-    <a class="btn" href="https://chat.antoinewang-tech.com/">
-      Ouvrir l'assistant
-    </a>
-  </main>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <strong>Fabric Mastery</strong>
+        <span>Assistant IA</span>
+      </div>
+      <nav>
+        <a href="#cas-usage">Cas d'usage</a>
+        <a href="#demo">Démo</a>
+        <a href="#acces">Accès</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" style="border-top: none;">
+        <h1>L'assistant IA qui répond sur Microsoft&nbsp;Fabric — avec ses sources</h1>
+        <p class="lead">
+          Posez vos questions sur Microsoft Fabric et Power BI. Chaque réponse est construite
+          uniquement à partir des archives de la newsletter <strong>Fabric Mastery</strong>,
+          et cite l'édition exacte dont elle provient. Pas d'invention&nbsp;: quand l'information
+          n'existe pas dans les sources, l'assistant le dit.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="https://chat.antoinewang-tech.com/">Essayer la démo gratuite</a>
+          <a class="btn ghost" href="https://blog.antoinewang-tech.com/">Lire la newsletter</a>
+        </div>
+        <p class="trust">Démo sans inscription · Archives réindexées chaque semaine · Réponses citées</p>
+      </section>
+
+      <section id="cas-usage">
+        <h2>Ce que l'assistant sait traiter</h2>
+        <p class="section-lead">
+          Les questions les plus fréquentes des équipes data qui déploient Microsoft Fabric.
+          Chaque thème renvoie vers l'article de référence qui alimente les réponses.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>OneLake&nbsp;: à quoi sert-il vraiment&nbsp;?</h3>
+            <p>Le stockage unique de Fabric, ses raccourcis (shortcuts), et pourquoi il évite de dupliquer la donnée entre les workspaces.</p>
+            <a href="https://blog.antoinewang-tech.com/p/onelake-microsoft-fabric-guide">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Direct Lake&nbsp;: quelles limites en production&nbsp;?</h3>
+            <p>Configuration réelle, bascule vers Import ou DirectQuery, performance observée et cas où le mode ne tient pas.</p>
+            <a href="https://blog.antoinewang-tech.com/p/direct-lake-voici-ce-que-cest-vraiment">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Lakehouse ou Warehouse&nbsp;: lequel choisir&nbsp;?</h3>
+            <p>Comparatif des magasins de données Fabric selon le profil d'équipe, le langage et les besoins transactionnels.</p>
+            <a href="https://blog.antoinewang-tech.com/p/data-stores-microsoft-fabric-comparatif">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Dataflow, Pipeline ou Notebook&nbsp;?</h3>
+            <p>Comment arbitrer entre les trois outils d'ingestion selon le volume, la fréquence et les compétences disponibles.</p>
+            <a href="https://blog.antoinewang-tech.com/p/microsoft-fabric-data-ingestion-tools">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Surveiller et maîtriser sa capacité</h3>
+            <p>Capacity Metrics, lecture du throttling, et Surge Protection pour éviter les dépassements de CU.</p>
+            <a href="https://blog.antoinewang-tech.com/p/capacity-metrics-fabric">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>RLS, CLS, OLS&nbsp;: sécuriser la donnée</h3>
+            <p>Où appliquer la sécurité — dans Power BI ou dans OneLake Security — et les conséquences de chaque choix.</p>
+            <a href="https://blog.antoinewang-tech.com/p/securite-microsoft-fabric">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Architecture médaillon Bronze / Silver / Gold</h3>
+            <p>Structurer les couches de transformation dans Fabric sans reproduire les erreurs classiques de modélisation.</p>
+            <a href="https://blog.antoinewang-tech.com/p/architecture-medaillon-microsoft-fabric">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Git Integration et pipelines de déploiement</h3>
+            <p>Versionner les artefacts Fabric, choisir une stratégie de branches et passer du PoC à la production.</p>
+            <a href="https://blog.antoinewang-tech.com/p/microsoft-fabric-git-integration">Article de référence →</a>
+          </article>
+          <article class="card">
+            <h3>Data Agent ou Copilot&nbsp;: quelle différence&nbsp;?</h3>
+            <p>Les trois écarts qui comptent en 2026, et quand la Fabric Copilot Capacity devient nécessaire.</p>
+            <a href="https://blog.antoinewang-tech.com/p/microsoft-fabric-data-agent-copilot">Article de référence →</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="fonctionnement">
+        <h2>Comment ça fonctionne</h2>
+        <p class="section-lead">
+          Une architecture RAG stricte&nbsp;: l'assistant cherche d'abord, répond ensuite, et cite toujours.
+        </p>
+        <ol class="steps">
+          <li>
+            <h3>Recherche dans les archives</h3>
+            <p>Votre question est comparée sémantiquement aux passages des éditions publiées de la newsletter.</p>
+          </li>
+          <li>
+            <h3>Réponse strictement sourcée</h3>
+            <p>Le modèle ne rédige qu'à partir des extraits retenus. Si rien ne correspond, il refuse plutôt que d'inventer.</p>
+          </li>
+          <li>
+            <h3>Sources vérifiables</h3>
+            <p>Chaque réponse affiche un indice de confiance et les articles d'origine, avec un lien direct pour vérifier.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="demo">
+        <h2>Un exemple de réponse</h2>
+        <p class="section-lead">
+          Aperçu du format de réponse, tel qu'il apparaît dans l'assistant.
+        </p>
+        <div class="demo">
+          <div class="q">
+            <b>Question</b>
+            Quel outil d'ingestion choisir entre Dataflow, Pipeline et Notebook&nbsp;?
+          </div>
+          <div class="a">
+            <span class="badge">🟢 Réponse trouvée dans une source officielle</span>
+            <p>
+              Le choix dépend surtout du profil de l'équipe et de la nature du traitement.
+              Le <strong>Dataflow Gen2</strong> convient aux transformations low-code et aux
+              utilisateurs déjà à l'aise avec Power Query. Le <strong>Pipeline</strong> sert
+              à orchestrer et à déplacer des volumes importants. Le <strong>Notebook</strong>
+              s'impose dès que la logique devient complexe ou nécessite Spark et du code.
+            </p>
+            <a class="src" href="https://blog.antoinewang-tech.com/p/microsoft-fabric-data-ingestion-tools">
+              <strong>Ingestion Microsoft Fabric : Dataflow, Pipeline ou Notebook ? Guide complet 2026</strong>
+              <span>2026-03-31</span>
+            </a>
+            <a class="src" href="https://blog.antoinewang-tech.com/p/dataflow-gen1-vs-gen2-microsoft-fabric">
+              <strong>Dataflow Gen1 vs Gen2 : faut-il migrer maintenant ?</strong>
+              <span>2026-07-28</span>
+            </a>
+          </div>
+        </div>
+        <p style="margin-top: 1.5rem; text-align: center;">
+          <a class="btn" href="https://chat.antoinewang-tech.com/">Poser votre propre question</a>
+        </p>
+      </section>
+
+      <section id="acces">
+        <h2>Démo libre, expérience complète pour les lecteurs</h2>
+        <p class="section-lead">
+          L'assistant est ouvert à l'essai sans inscription. L'usage illimité est réservé
+          aux lecteurs de la newsletter, ce qui garde le service disponible et son coût maîtrisé.
+        </p>
+        <div class="access">
+          <div>
+            <h3>Démo — sans code</h3>
+            <ul>
+              <li>Questions d'essai immédiates</li>
+              <li>Réponses complètes et sourcées</li>
+              <li>Aucune inscription, aucun compte</li>
+            </ul>
+            <a class="btn ghost" href="https://chat.antoinewang-tech.com/">Essayer maintenant</a>
+          </div>
+          <div class="hi">
+            <h3>Lecteurs — code newsletter</h3>
+            <ul>
+              <li>Questions illimitées sur la session</li>
+              <li>Code publié en haut de chaque édition</li>
+              <li>Nouvelles éditions indexées chaque semaine</li>
+            </ul>
+            <a class="btn" href="https://blog.antoinewang-tech.com/">Recevoir le code</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2>Questions fréquentes</h2>
+        <details>
+          <summary>Les réponses sont-elles fiables&nbsp;?</summary>
+          <p>L'assistant fonctionne en RAG strict&nbsp;: il ne répond qu'à partir des extraits retrouvés dans les éditions de la newsletter, affiche un indice de confiance et cite ses sources. Lorsqu'aucun passage pertinent n'est trouvé, il refuse de répondre au lieu de produire une réponse plausible mais inventée.</p>
+        </details>
+        <details>
+          <summary>Faut-il un code d'accès pour l'utiliser&nbsp;?</summary>
+          <p>Non pour la démo&nbsp;: vous pouvez poser vos premières questions librement. Au-delà, un code lecteur est demandé. Il est publié en haut de la dernière édition de la newsletter Fabric Mastery.</p>
+        </details>
+        <details>
+          <summary>Sur quelles sources l'assistant s'appuie-t-il&nbsp;?</summary>
+          <p>Uniquement sur les éditions publiées de la newsletter Fabric Mastery, consacrées à Microsoft Fabric et Power BI. Les archives sont réindexées automatiquement chaque semaine, à la publication d'une nouvelle édition.</p>
+        </details>
+        <details>
+          <summary>Est-ce un produit Microsoft&nbsp;?</summary>
+          <p>Non. C'est un projet indépendant, publié en open source, qui s'appuie sur Azure OpenAI et Azure Container Apps. Microsoft Fabric et Power BI sont des marques de Microsoft.</p>
+        </details>
+        <details>
+          <summary>Mes questions sont-elles conservées&nbsp;?</summary>
+          <p>La conversation vit dans votre session de navigateur et disparaît lorsque vous la réinitialisez ou fermez l'onglet. Aucun compte n'est créé pour utiliser l'assistant.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <a href="https://blog.antoinewang-tech.com/">Newsletter</a>·
+        <a href="https://chat.antoinewang-tech.com/">Assistant</a>·
+        <a href="https://github.com/awang1020/chatbot-fabric-mastery">Code source</a>
+      </p>
+      <p>Projet indépendant d'Antoine Wang · Non affilié à Microsoft.</p>
+    </footer>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Assistant IA Fabric Mastery",
+        "url": "https://chat.antoinewang-tech.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "inLanguage": ["fr", "en"],
+        "description": "Chatbot IA spécialisé Microsoft Fabric et Power BI, dont chaque réponse est sourcée depuis les archives de la newsletter Fabric Mastery.",
+        "author": { "@type": "Person", "name": "Antoine Wang" },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "description": "Démo gratuite sans inscription ; usage illimité avec le code réservé aux lecteurs de la newsletter."
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Les réponses de l'assistant Microsoft Fabric sont-elles fiables ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "L'assistant fonctionne en RAG strict : il ne répond qu'à partir des extraits retrouvés dans les éditions de la newsletter, affiche un indice de confiance et cite ses sources. Lorsqu'aucun passage pertinent n'est trouvé, il refuse de répondre au lieu d'inventer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Faut-il un code d'accès pour utiliser l'assistant ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non pour la démo : les premières questions sont libres. Au-delà, un code lecteur est demandé. Il est publié en haut de la dernière édition de la newsletter Fabric Mastery."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Sur quelles sources l'assistant s'appuie-t-il ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Uniquement sur les éditions publiées de la newsletter Fabric Mastery, consacrées à Microsoft Fabric et Power BI. Les archives sont réindexées automatiquement chaque semaine."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce un produit Microsoft ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non. C'est un projet indépendant, publié en open source, qui s'appuie sur Azure OpenAI et Azure Container Apps. Microsoft Fabric et Power BI sont des marques de Microsoft."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Mes questions sont-elles conservées ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La conversation vit dans la session de navigateur et disparaît à la réinitialisation ou à la fermeture de l'onglet. Aucun compte n'est créé."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </body>
 </html>

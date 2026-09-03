@@ -10,7 +10,7 @@ param openAiName string
 @description('Full container image (tag included).')
 param containerImage string = 'mcr.microsoft.com/k8se/quickstart:latest'
 
-@description('Container App name.')
+@description('Container App name. Kept as-is across product renames: changing it recreates the app and re-issues the managed TLS certificate for the custom domain.')
 param appName string = 'ask-fabric-mastery'
 
 @description('Location. Defaults to the resource group location.')
@@ -45,9 +45,14 @@ param defaultLanguage string = 'fr'
 @description('Daily LAW ingestion cap (GB). Keeps the bill predictable.')
 param logDailyQuotaGb int = 1
 
-@description('Shared access code that visitors must enter before chatting. Publish it in the latest newsletter edition so readers can try the app.')
+@description('Shared access code that visitors must enter to unlock unlimited questions. Publish it in the latest newsletter edition so readers can try the app.')
 @secure()
 param appPassword string = ''
+
+@description('Free demo questions allowed before the newsletter access code is required.')
+@minValue(0)
+@maxValue(20)
+param freeQuestions int = 2
 
 @description('Max questions a single browser session can ask per window.')
 @minValue(1)
@@ -143,6 +148,7 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
             // Retrieval & generation tuning (TOP_K, SIMILARITY_CUTOFF, TEMPERATURE, MAX_TOKENS)
             // live in src/config.py — not in infra — so a code change ships without a Bicep redeploy.
             { name: 'APP_PASSWORD', secretRef: 'app-password' }
+            { name: 'FREE_QUESTIONS', value: string(freeQuestions) }
             { name: 'RATE_LIMIT_MAX_QUESTIONS', value: string(rateLimitMaxQuestions) }
             { name: 'RATE_LIMIT_WINDOW_SECONDS', value: string(rateLimitWindowSeconds) }
           ]

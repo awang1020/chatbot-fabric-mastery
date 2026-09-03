@@ -77,10 +77,12 @@ jobs:
       - name: Compute lowercase image name + tag
         id: img
         env:
-          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
         run: |
-          LOWER_REPO=$(echo "$REPO" | tr '[:upper:]' '[:lower:]')
-          IMAGE="ghcr.io/${LOWER_REPO}/ask-fabric-mastery"
+          LOWER_OWNER=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+          # Pinned, NOT derived from the repo name: renaming the repo would push to a
+          # brand-new GHCR package, private by default and unpullable by the Container App.
+          IMAGE="ghcr.io/${LOWER_OWNER}/ask-fabric-mastery/ask-fabric-mastery"
           TAG=$(date -u +'%Y%m%d-%H%M%S')
           echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"

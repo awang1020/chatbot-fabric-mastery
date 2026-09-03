@@ -12,8 +12,16 @@
 .EXAMPLE
     pwsh ./scripts/setup_github_oidc.ps1 `
         -GithubOwner antoinewang `
-        -GithubRepo  ask-fabric-mastery `
+        -GithubRepo  chatbot-fabric-mastery `
         -OpenAiName  oai-fabmastery-rdeaxiqrltzqo
+
+.NOTES
+    The federated credential subject embeds the repository name. After renaming
+    the GitHub repo, re-run this script BEFORE the next workflow run: GitHub
+    redirects the repo URL but mints OIDC tokens with the NEW name, so the old
+    credential no longer matches and azure/login fails.
+    Azure resource names (resource group, Container App, app registration) are
+    deliberately left unchanged by a rename - they are physical resources.
 #>
 [CmdletBinding()]
 param(

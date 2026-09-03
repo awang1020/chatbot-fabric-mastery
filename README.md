@@ -1,4 +1,4 @@
-# Ask Fabric Mastery — RAG Chatbot
+# Chatbot Fabric Mastery — RAG Chatbot
 
 Production-ready Retrieval-Augmented Generation chatbot that answers
 Microsoft Fabric and Power BI questions **strictly** from the
@@ -6,8 +6,14 @@ Microsoft Fabric and Power BI questions **strictly** from the
 No hallucination, every answer cited with a direct link to the source
 edition.
 
+**Landing page (indexable):** <https://awang1020.github.io/chatbot-fabric-mastery/>
 **Live app:** <https://chat.antoinewang-tech.com>
-**Repo:** <https://github.com/awang1020/ask-fabric-mastery>
+**Repo:** <https://github.com/awang1020/chatbot-fabric-mastery>
+
+Acquisition runs on the public landing page, the newsletter and GitHub;
+the chatbot itself is the retention product. Visitors get a code-free demo,
+then unlock unlimited questions with the reader code published in the
+newsletter.
 
 | Concern         | Choice |
 | --------------- | ------ |
@@ -19,7 +25,7 @@ edition.
 | Container image | GitHub Container Registry (GHCR), built weekly by GitHub Actions |
 | CI/CD           | GitHub Actions + OIDC federated identity (no long-lived secrets) |
 | Cost ceiling    | Hard AOAI TPM cap (chat 10K, embed 30K) + Azure budget 20 €/mo with email alerts |
-| Anti-abuse      | Shared access code published in the latest newsletter edition, strict-RAG prompt + regex jailbreak detector + per-session sliding rate limit |
+| Anti-abuse      | Freemium gate (free demo questions, then the reader code published in the newsletter), strict-RAG prompt + regex jailbreak detector + per-session sliding rate limit |
 
 ---
 
@@ -31,12 +37,13 @@ edition.
 4. [One-time Azure setup](#4-one-time-azure-setup)
 5. [One-time GitHub setup](#5-one-time-github-setup)
 6. [Deploy infrastructure](#6-deploy-infrastructure)
-7. [Set the access password](#7-set-the-access-password)
+7. [Freemium access + guardrails](#7-freemium-access--prompt-level-guardrails)
 8. [Trigger the CI/CD pipeline](#8-trigger-the-cicd-pipeline)
 9. [Operating in production](#9-operating-in-production)
 10. [Security posture](#10-security-posture)
 11. [Cost controls](#11-cost-controls)
 12. [Troubleshooting](#12-troubleshooting)
+13. [Renaming the project](#13-renaming-the-project)
 
 ---
 
@@ -45,9 +52,10 @@ edition.
 ```mermaid
 flowchart LR
     subgraph "GitHub"
-        REPO[Repo: awang1020/ask-fabric-mastery]
+        REPO[Repo: awang1020/chatbot-fabric-mastery]
+        PAGES[GitHub Pages<br/>public landing page<br/>docs/]
         GHA[GitHub Actions<br/>Weekly cron + push]
-        GHCR[GHCR public image<br/>ghcr.io/.../ask-fabric-mastery]
+        GHCR[GHCR public image<br/>ghcr.io/awang1020/ask-fabric-mastery/ask-fabric-mastery]
     end
 
     subgraph "Azure subscription"
@@ -62,6 +70,8 @@ flowchart LR
     end
 
     USER[Newsletter subscriber] -->|HTTPS + access code| ACA
+    VISITOR[Search / LinkedIn visitor] -->|indexable content| PAGES
+    PAGES -->|CTA| ACA
     REPO -->|cron 09:30 UTC Tue<br/>or push to main| GHA
     GHA -->|OIDC token| ENTRA
     GHA -->|docker push| GHCR
@@ -74,12 +84,20 @@ flowchart LR
 
 ### Request flow
 
-1. Visitor lands on the Container App URL → Streamlit shows the **access-code gate**.
-2. Visitor enters the password → session marker stored in `st.session_state` (no cookie sent anywhere else).
-3. Visitor types a question → in-app **rate limiter** checks the session has not exceeded `RATE_LIMIT_MAX_QUESTIONS` in `RATE_LIMIT_WINDOW_SECONDS`.
-4. LlamaIndex retrieves the top-K chunks from the local Chroma collection (no network call).
-5. Azure OpenAI embedding + chat are called over Entra ID (managed identity, no key).
-6. Answer + source cards (title, date, score, snippet, direct Substack link) are rendered.
+1. Visitor lands on the Container App URL → Streamlit shows the hero and the
+   example prompts, with no code required.
+2. Visitor asks up to `FREE_QUESTIONS` demo questions. When the quota runs
+   out, the unlock panel replaces the composer and points at the newsletter.
+3. Visitor pastes the reader code → session marker stored in
+   `st.session_state` (no cookie sent anywhere else) → unlimited questions.
+4. Every question also passes the in-app **rate limiter**
+   (`RATE_LIMIT_MAX_QUESTIONS` in `RATE_LIMIT_WINDOW_SECONDS`).
+5. LlamaIndex retrieves the top-K chunks from the local Chroma collection
+   (no network call).
+6. Azure OpenAI embedding + chat are called over Entra ID (managed identity,
+   no key).
+7. Answer + source cards (title, date, score, snippet, direct Substack link)
+   are rendered.
 
 ### Why this stack
 
@@ -121,6 +139,11 @@ flowchart LR
 │   ├── deploy_azure.ps1         # One-shot RG + AOAI deploy
 │   └── setup_github_oidc.ps1    # Bootstrap SP + federated cred + RBAC
 │
+├── docs/                        # GitHub Pages: public indexable landing page
+│   ├── index.html               # Use cases, demo, FAQ, OG + JSON-LD
+│   ├── robots.txt
+│   └── sitemap.xml
+│
 ├── infra/
 │   ├── main.bicep               # Subscription-scope: RG + AOAI module
 │   ├── main.bicepparam
@@ -151,8 +174,8 @@ flowchart LR
 ### Setup
 
 ```powershell
-git clone https://github.com/awang1020/ask-fabric-mastery.git
-cd ask-fabric-mastery
+git clone https://github.com/awang1020/chatbot-fabric-mastery.git
+cd chatbot-fabric-mastery
 
 python -m venv .venv
 . .venv\Scripts\Activate.ps1
@@ -323,33 +346,41 @@ az rest --method PUT `
 
 ---
 
-## 7. Reader-gated access + prompt-level guardrails
+## 7. Freemium access + prompt-level guardrails
 
-The app is gated by a **shared access code** that you publish at the top of
-the latest newsletter edition. Readers paste it once per browser session and
-start asking questions. The gate is deliberately *not* per-user auth — it is
-a cheap anti-bot / anti-scraper layer suitable for a newsletter audience.
+The app opens on a **code-free demo**: every visitor can ask `FREE_QUESTIONS`
+questions (default 2) and see complete, sourced answers. Once the quota is
+spent, an unlock panel asks for the **reader code** you publish at the top of
+the latest newsletter edition. Search and social traffic can therefore judge
+the product before converting, and the newsletter stays the way to unlock
+unlimited use.
+
+The demo quota lives in `st.session_state`, so a fresh browser session resets
+it. That is deliberate: it is a conversion nudge, not a security boundary.
+The AOAI TPM cap and the Azure budget below remain the real spend ceiling.
 
 Layered defences:
 
-1. **Shared access code gate** (`src/safety.py::require_password`) reads the
-   `APP_PASSWORD` env var on the Container App. When unset, the gate is
-   dormant; when set, the app refuses to render anything else (and never
-   calls Azure OpenAI) until the code is typed correctly. Constant-time
+1. **Freemium gate** (`src/safety.py`) reads `APP_PASSWORD` and
+   `FREE_QUESTIONS` on the Container App. When `APP_PASSWORD` is unset the
+   gate is dormant and the app is fully open (local dev). Constant-time
    comparison avoids trivial timing oracles.
-2. **Strict-RAG system prompt** (`src/prompts.py`) tells the model to answer
+2. **Admin controls are opt-in**: the index rebuild button and the internal
+   paths only render when `ADMIN_MODE` is truthy. Never set it on the public
+   deployment, since re-embedding the corpus costs AOAI tokens.
+3. **Strict-RAG system prompt** (`src/prompts.py`) tells the model to answer
    only from the retrieved excerpts, refuse any out-of-scope topic, and
    ignore every jailbreak / instruction-override attempt.
-3. **Regex jailbreak detector** (`src/chat_engine.py::looks_like_jailbreak`)
+4. **Regex jailbreak detector** (`src/chat_engine.py::looks_like_jailbreak`)
    short-circuits obvious prompt-injection patterns (`ignore previous
    instructions`, `tu es maintenant`, `DAN`, `developer mode`, `reveal your
    system prompt`, etc.) BEFORE the LLM is called — zero AOAI tokens spent
    on attacks.
-4. **Empty-retrieval refusal** when the similarity cutoff filters out every
+5. **Empty-retrieval refusal** when the similarity cutoff filters out every
    chunk: the user gets the refusal line instead of the model speculating.
-5. **Per-session sliding rate limit**: 20 questions / 15 min (configurable
+6. **Per-session sliding rate limit**: 20 questions / 15 min (configurable
    via `RATE_LIMIT_MAX_QUESTIONS` / `RATE_LIMIT_WINDOW_SECONDS`).
-6. **AOAI TPM cap**: 10K TPM chat, 30K TPM embedding — hard ceiling on
+7. **AOAI TPM cap**: 10K TPM chat, 30K TPM embedding — hard ceiling on
    throughput regardless of how many users try at once.
 7. **Azure budget**: 20 €/month with email alerts at 50 / 80 / 100 %.
 
@@ -532,6 +563,86 @@ az role assignment list --assignee $spId --all -o table
 az containerapp update -g rg-ask-fabric-mastery -n ask-fabric-mastery `
   --image ghcr.io/<OWNER>/<REPO>/ask-fabric-mastery:<TAG>
 ```
+
+---
+
+## 13. Renaming the project
+
+The repo is being renamed `ask-fabric-mastery` -> `chatbot-fabric-mastery`
+for brand clarity. The **Azure resource names stay unchanged on purpose**
+(`rg-ask-fabric-mastery`, `ask-fabric-mastery`, `cae-…`, `law-…`, the AOAI
+account and the managed certificate). Renaming them would mean recreating the
+Container App and re-issuing the TLS certificate for
+`chat.antoinewang-tech.com` for zero user-visible benefit.
+
+Run the steps in this order — steps 1 and 3 are the ones that break CI if
+skipped.
+
+1. **Add the new OIDC federated credential first.** GitHub redirects the repo
+   URL after a rename, but it mints OIDC tokens with the **new** name, so the
+   existing credential stops matching and `azure/login` fails.
+
+   ```powershell
+   pwsh ./scripts/setup_github_oidc.ps1 `
+     -GithubOwner awang1020 `
+     -GithubRepo  chatbot-fabric-mastery `
+     -OpenAiName  oai-fabmastery-rdeaxiqrltzqo
+   ```
+
+2. **Rename the repo** in GitHub → Settings → General.
+
+3. **Leave the GHCR package name alone.** The workflow pins the image path to
+   `ghcr.io/<owner>/ask-fabric-mastery/ask-fabric-mastery` on purpose. That
+   package is already **public**, which is what lets the Container App pull it
+   anonymously. Deriving the path from the repo name would push to a brand-new
+   package on the first run after the rename, and new GHCR packages default to
+   *private* - the revision would then fail to pull. Treat the package like the
+   Azure resources: a physical artifact that survives the rebrand.
+
+   After the rename, confirm the workflow can still push to it:
+   GitHub -> Packages -> `ask-fabric-mastery` -> Package settings -> Manage
+   Actions access, and make sure the renamed repo is listed with `Write`.
+
+4. **Update the local remote.**
+
+   ```powershell
+   git remote set-url origin https://github.com/awang1020/chatbot-fabric-mastery.git
+   ```
+
+5. **Enable GitHub Pages** on `main` / `docs` folder so the landing page at
+   <https://awang1020.github.io/chatbot-fabric-mastery/> goes live.
+
+6. **Fix the newsletter backlinks.** Several published editions still point at
+   `http://awang1020.github.io/ask-fabric-mastery` (old name, plain HTTP).
+   Edit the live Substack posts — not just the Markdown copies in
+   `data/newsletters/`, which are only the ingestion cache.
+
+7. **Optional but recommended:** create an empty `ask-fabric-mastery` repo
+   with a `docs/index.html` that redirects to the new landing page. GitHub
+   redirects repository URLs after a rename, but the old
+   `github.io/ask-fabric-mastery/` Pages URL is not guaranteed to follow.
+
+8. **Submit the landing page** to Google Search Console and Bing Webmaster
+   Tools, and set the GitHub repo `homepage` + topics.
+
+### Verification checklist
+
+```powershell
+# CI can still authenticate and deploy
+gh workflow run refresh.yml --repo awang1020/chatbot-fabric-mastery
+gh run watch --repo awang1020/chatbot-fabric-mastery
+
+# The app is serving the new image and the domain still resolves
+az containerapp show -g rg-ask-fabric-mastery -n ask-fabric-mastery `
+  --query "{image:properties.template.containers[0].image, fqdn:properties.configuration.ingress.fqdn}"
+curl.exe -sS -o NUL -w "%{http_code}`n" https://chat.antoinewang-tech.com/
+curl.exe -sS -o NUL -w "%{http_code}`n" https://awang1020.github.io/chatbot-fabric-mastery/
+```
+
+If you later move the landing page to a custom domain (for example
+`fabric.antoinewang-tech.com`), add `docs/CNAME` and update the URL in
+`docs/index.html` (canonical + Open Graph), `docs/sitemap.xml` and
+`docs/robots.txt` — those are the only three places that hardcode it.
 
 ---
 

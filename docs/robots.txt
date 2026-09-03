@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://awang1020.github.io/chatbot-fabric-mastery/sitemap.xml

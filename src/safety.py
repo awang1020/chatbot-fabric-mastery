@@ -1,19 +1,25 @@
 """Lightweight in-process safety controls for the public RAG UI.
 
-Two layers are exposed:
+Three layers are exposed:
 
-1. ``require_password`` — optional shared-secret gate. When ``APP_PASSWORD``
-   is set, visitors must type the password before they can ask anything.
-   This is intentionally *not* per-user auth: it is a cheap anti-bot /
-   anti-scraper layer suitable for a newsletter audience.
+1. **Freemium access gate** — every visitor gets ``FREE_QUESTIONS`` demo
+   questions, then must enter the shared code published in the newsletter.
+   When ``APP_PASSWORD`` is unset the gate is dormant and the app is fully
+   open (local development). This is intentionally *not* per-user auth: it
+   is a conversion step plus a cheap anti-bot layer for a newsletter audience.
 
 2. ``check_rate_limit`` — session-scoped sliding-window rate limiter.
    Caps how many questions a single Streamlit session can ask in a window,
    protecting AOAI token spend against a tab left open with auto-refresh
    or a curious user mashing the example cards.
 
-Both helpers store their state in ``st.session_state`` and degrade safely
-(open) when configuration is missing.
+3. ``admin_mode_enabled`` — keeps index-management controls hidden unless the
+   deployment opts in, so a public visitor can never trigger a re-embed of
+   the whole corpus.
+
+State lives in ``st.session_state``, so it resets in a fresh browser session:
+the demo quota is a conversion nudge, not a hard security boundary. The AOAI
+TPM cap and the Azure budget remain the actual ceiling on spend.
 """
 from __future__ import annotations
 
@@ -29,6 +35,9 @@ from src.i18n import t
 
 _PASSWORD_KEY = "_auth_ok"
 _RATE_KEY = "_question_timestamps"
+_FREE_USED_KEY = "_free_questions_used"
+
+DEFAULT_FREE_QUESTIONS = 2
 
 
 @dataclass(frozen=True)
@@ -42,27 +51,59 @@ def _expected_password() -> str | None:
     return pwd or None
 
 
-def require_password(language: str) -> bool:
-    """Block rendering until the visitor has typed the shared password.
+def _free_quota() -> int:
+    raw = os.getenv("FREE_QUESTIONS", "").strip()
+    if not raw:
+        return DEFAULT_FREE_QUESTIONS
+    try:
+        return max(0, int(raw))
+    except ValueError:
+        return DEFAULT_FREE_QUESTIONS
 
-    Returns True when the page is unlocked (no password configured, or the
-    user has authenticated successfully) and False while the gate is shown.
-    """
+
+def admin_mode_enabled() -> bool:
+    """True when index-management controls may be rendered. Never in production."""
+    return os.getenv("ADMIN_MODE", "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def gate_enabled() -> bool:
+    """True when this deployment publishes an access code in the newsletter."""
+    return _expected_password() is not None
+
+
+def is_unlocked() -> bool:
+    """True when the visitor has the full experience (no gate, or valid code)."""
+    if not gate_enabled():
+        return True
+    return st.session_state.get(_PASSWORD_KEY) is True
+
+
+def free_questions_left() -> int:
+    """Demo questions still available before the newsletter code is required."""
+    if is_unlocked():
+        return 0
+    used = int(st.session_state.get(_FREE_USED_KEY, 0) or 0)
+    return max(0, _free_quota() - used)
+
+
+def can_ask_question() -> bool:
+    return is_unlocked() or free_questions_left() > 0
+
+
+def register_question() -> None:
+    """Consume one demo question; no-op once the visitor has unlocked."""
+    if is_unlocked():
+        return
+    st.session_state[_FREE_USED_KEY] = int(st.session_state.get(_FREE_USED_KEY, 0) or 0) + 1
+
+
+def unlock_form(language: str, *, key: str) -> bool:
+    """Render the access-code form. Returns True when it just unlocked."""
     expected = _expected_password()
     if expected is None:
-        return True
-    if st.session_state.get(_PASSWORD_KEY) is True:
-        return True
+        return False
 
-    st.markdown(
-        '<div class="afm-hero" style="margin-top:6rem;">'
-        f'<h1>{t(language, "auth_title")}</h1>'
-        f'<p>{t(language, "auth_subtitle")}</p>'
-        '</div>',
-        unsafe_allow_html=True,
-    )
-
-    with st.form("afm-password-gate", clear_on_submit=False):
+    with st.form(key, clear_on_submit=False):
         pwd = st.text_input(
             t(language, "auth_password_label"),
             type="password",
@@ -72,13 +113,13 @@ def require_password(language: str) -> bool:
             t(language, "auth_submit"), use_container_width=True
         )
 
-    if submitted:
-        # Constant-time compare — avoid trivial timing oracles.
-        if secrets.compare_digest(pwd, expected):
-            st.session_state[_PASSWORD_KEY] = True
-            st.rerun()
-        else:
-            st.error(t(language, "auth_invalid"))
+    if not submitted:
+        return False
+    # Constant-time compare — avoid trivial timing oracles.
+    if secrets.compare_digest(pwd, expected):
+        st.session_state[_PASSWORD_KEY] = True
+        return True
+    st.error(t(language, "auth_invalid"))
     return False
 
 

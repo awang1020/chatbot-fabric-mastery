@@ -3,7 +3,8 @@
 # ours. Dependabot proposes the bumps (see .github/dependabot.yml).
 
 llama-index-core==0.14.24
-llama-index-llms-azure-openai==0.6.0
+# Held below 0.6: llama-index-embeddings-azure-openai 0.6.0 requires <0.6 here.
+llama-index-llms-azure-openai==0.5.5
 llama-index-embeddings-azure-openai==0.6.0
 llama-index-vector-stores-chroma==0.6.0
 llama-index-readers-file==0.7.0

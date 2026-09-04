@@ -19,18 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-NOTE ON CONTENT
-
-This licence covers the source code only.
-
-The newsletter editions cached under `data/newsletters/` and the answers the
-assistant derives from them remain the copyright of Antoine Wang and are
-published at https://blog.antoinewang-tech.com. They are included here solely
-to build the retrieval index and are not licensed for redistribution.
-
-Microsoft, Microsoft Fabric, Power BI and Azure are trademarks of the
-Microsoft group of companies. This project is independent and is not
-affiliated with, endorsed by, or sponsored by Microsoft.

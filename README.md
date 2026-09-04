@@ -700,4 +700,7 @@ If you later move the landing page to a custom domain (for example
 
 ## License
 
-MIT. Newsletter content remains © [Antoine Wang](https://blog.antoinewang-tech.com/).
+MIT for the source code — see [LICENSE](LICENSE).
+
+Newsletter content, trademarks and the accepted third-party advisories are
+covered in [NOTICE.md](NOTICE.md). Newsletter content remains © [Antoine Wang](https://blog.antoinewang-tech.com/).

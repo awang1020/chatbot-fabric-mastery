@@ -43,7 +43,7 @@ param embeddingCapacity int = 50
 
 @description('Tags applied to all resources.')
 param tags object = {
-  project: 'ask-fabric-mastery'
+  project: 'chatbot-fabric-mastery'
   managedBy: 'bicep'
 }
 

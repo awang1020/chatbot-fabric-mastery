@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confidentialité — Chatbot Fabric Mastery</title>
+  <meta name="description" content="Quelles données Chatbot Fabric Mastery traite, où elles transitent, combien de temps elles sont conservées." />
+  <link rel="canonical" href="https://awang1020.github.io/chatbot-fabric-mastery/confidentialite.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#6750A4" />
+  <style>
+    :root { color-scheme: light; --accent:#6750A4; --ink:#1D1D1F; --muted:#6E6E73; --bg:#FAFAF7; --line:rgba(0,0,0,.08); }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);line-height:1.65;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased}
+    .wrap{max-width:760px;margin:0 auto;padding:0 1.25rem}
+    a{color:var(--accent)}
+    header{padding:1.1rem 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    header strong{font-size:1.02rem;font-weight:600;letter-spacing:-.012em}
+    header a{font-size:.9rem;text-decoration:none;color:var(--muted)}
+    header a:hover{color:var(--ink)}
+    h1{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:600;letter-spacing:-.02em;margin:2.5rem 0 .5rem}
+    .updated{color:var(--muted);font-size:.9rem;margin:0 0 2rem}
+    h2{font-size:1.15rem;font-weight:600;margin:2.25rem 0 .6rem}
+    p,li{color:#3A3A3C;font-size:.97rem}
+    ul{padding-left:1.2rem}
+    li{margin-bottom:.4rem}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem;margin:1.25rem 0}
+    .card p{margin:0;font-size:.93rem;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.93rem}
+    th,td{text-align:left;padding:.6rem .5rem;border-bottom:1px solid var(--line);vertical-align:top}
+    th{color:var(--muted);font-weight:500}
+    footer{border-top:1px solid var(--line);margin-top:3rem;padding:2rem 0;text-align:center;color:#86868B;font-size:.85rem}
+    footer a{color:var(--muted);text-decoration:none;margin:0 .4rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <strong>Chatbot Fabric Mastery</strong>
+      <a href="./">← Retour</a>
+    </header>
+
+    <h1>Confidentialité</h1>
+    <p class="updated">Dernière mise à jour : 4 septembre 2026</p>
+
+    <p>
+      Chatbot Fabric Mastery est un projet indépendant édité par Antoine Wang, adossé à la
+      newsletter <a href="https://blog.antoinewang-tech.com">Fabric Mastery</a>. Cette page
+      décrit concrètement ce qui est traité, où, et pendant combien de temps.
+    </p>
+
+    <div class="card">
+      <p>
+        <strong>L'essentiel :</strong> aucun compte n'est créé, aucun traceur publicitaire n'est
+        déposé, et le texte de vos questions n'est jamais écrit dans les journaux du service.
+      </p>
+    </div>
+
+    <h2>Données traitées</h2>
+    <table>
+      <tr><th>Donnée</th><th>Finalité</th><th>Conservation</th></tr>
+      <tr>
+        <td>Le texte de vos questions</td>
+        <td>Produire la réponse</td>
+        <td>Dans la session du navigateur uniquement. Effacée à la fermeture de l'onglet ou via « Effacer la conversation ».</td>
+      </tr>
+      <tr>
+        <td>Compteurs de session (questions posées, code saisi ou non)</td>
+        <td>Appliquer la démo gratuite et la limitation de débit</td>
+        <td>Session du navigateur.</td>
+      </tr>
+      <tr>
+        <td>Journaux techniques (horodatage, erreurs, métriques de pertinence)</td>
+        <td>Exploitation et diagnostic</td>
+        <td>30 jours dans Azure Log Analytics. <strong>Ne contiennent pas le texte des questions.</strong></td>
+      </tr>
+    </table>
+
+    <h2>Où vos questions transitent</h2>
+    <p>
+      Pour produire une réponse, votre question est envoyée à <strong>Azure OpenAI</strong>,
+      dans la région <strong>Suède Centre (Union européenne)</strong>. Le service est hébergé sur
+      Azure Container Apps, dans la même région.
+    </p>
+    <p>
+      Azure OpenAI applique un dispositif de surveillance des abus propre à la plateforme
+      Microsoft, qui peut conserver les invites et les réponses pendant une durée limitée
+      (jusqu'à 30 jours) afin de détecter les usages abusifs, sauf exemption accordée par
+      Microsoft. Ce traitement relève de Microsoft en tant que fournisseur de la plateforme.
+      Voir la <a href="https://learn.microsoft.com/legal/cognitive-services/openai/data-privacy" target="_blank" rel="noopener">documentation Microsoft sur les données Azure OpenAI</a>.
+    </p>
+    <p>
+      Vos questions ne sont <strong>pas</strong> utilisées pour entraîner un modèle, ni revendues,
+      ni transmises à un tiers à des fins commerciales.
+    </p>
+
+    <h2>Cookies et mesure d'audience</h2>
+    <p>
+      L'application n'utilise ni cookie publicitaire ni traceur tiers. Le framework Streamlit
+      maintient un état de session technique, strictement nécessaire au fonctionnement du chat.
+      La page d'accueil est un fichier statique servi par GitHub Pages ; GitHub peut journaliser
+      les accès à ses propres fins d'exploitation.
+    </p>
+
+    <h2>Sources et propriété intellectuelle</h2>
+    <p>
+      Les réponses sont construites exclusivement à partir des éditions publiées de la newsletter
+      Fabric Mastery, dont le contenu reste la propriété d'Antoine Wang. Le code source est publié
+      sous licence MIT.
+    </p>
+
+    <h2>Limites du service</h2>
+    <p>
+      L'assistant est un outil d'aide fondé sur un modèle de langage. Malgré une conception
+      qui n'autorise que des réponses sourcées, des erreurs restent possibles. Vérifiez toujours
+      via les sources citées avant toute décision d'architecture ou de production. Le service est
+      fourni en l'état, sans garantie.
+    </p>
+
+    <h2>Vos droits et contact</h2>
+    <p>
+      Puisque aucun compte n'est créé et qu'aucun identifiant personnel n'est conservé côté
+      service, il n'existe pas de profil utilisateur à consulter ou supprimer : effacer la
+      conversation ou fermer l'onglet suffit à supprimer les données de session.
+    </p>
+    <p>
+      Pour toute question relative à ces traitements, ou pour exercer vos droits au titre du RGPD,
+      répondez à n'importe quelle édition de la
+      <a href="https://blog.antoinewang-tech.com">newsletter</a> ou ouvrez un ticket sur le
+      <a href="https://github.com/awang1020/chatbot-fabric-mastery/issues">dépôt GitHub</a>.
+    </p>
+
+    <div class="card">
+      <p>
+        Projet indépendant. Microsoft, Microsoft Fabric, Power BI et Azure sont des marques du
+        groupe Microsoft. Ce projet n'est ni affilié à Microsoft, ni approuvé ou sponsorisé
+        par Microsoft.
+      </p>
+    </div>
+
+    <footer>
+      <p>
+        <a href="./">Accueil</a>·
+        <a href="https://blog.antoinewang-tech.com/">Newsletter</a>·
+        <a href="https://chat.antoinewang-tech.com/">Assistant</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

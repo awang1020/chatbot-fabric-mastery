@@ -18,14 +18,19 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# App code + pre-built data and vector index (image is self-contained)
-COPY src ./src
-COPY scripts ./scripts
-COPY app.py ./app.py
-COPY .streamlit ./.streamlit
-COPY assets ./assets
-COPY data ./data
-COPY storage ./storage
+RUN useradd --create-home --uid 10001 appuser
+
+# Ownership matters: Chroma opens a SQLite file and needs write access to its
+# directory (journal/WAL) even when the app only reads the index.
+COPY --chown=appuser:appuser src ./src
+COPY --chown=appuser:appuser scripts ./scripts
+COPY --chown=appuser:appuser app.py ./app.py
+COPY --chown=appuser:appuser .streamlit ./.streamlit
+COPY --chown=appuser:appuser assets ./assets
+COPY --chown=appuser:appuser data ./data
+COPY --chown=appuser:appuser storage ./storage
+
+USER appuser
 
 EXPOSE 8501
 

@@ -64,6 +64,12 @@ param rateLimitMaxQuestions int = 20
 @maxValue(86400)
 param rateLimitWindowSeconds int = 900
 
+@description('Tags applied to every resource created here.')
+param tags object = {
+  project: 'chatbot-fabric-mastery'
+  managedBy: 'bicep'
+}
+
 resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' existing = {
   name: openAiName
 }
@@ -71,6 +77,7 @@ resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' existing = {
 resource law 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: 'law-${appName}'
   location: location
+  tags: tags
   properties: {
     sku: { name: 'PerGB2018' }
     retentionInDays: 30
@@ -81,6 +88,7 @@ resource law 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
 resource env 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: 'cae-${appName}'
   location: location
+  tags: tags
   properties: {
     appLogsConfiguration: {
       destination: 'log-analytics'
@@ -96,6 +104,7 @@ resource env 'Microsoft.App/managedEnvironments@2024-03-01' = {
 resource app 'Microsoft.App/containerApps@2024-03-01' = {
   name: appName
   location: location
+  tags: tags
   identity: {
     type: 'SystemAssigned'
   }

@@ -243,5 +243,12 @@
     "slug": "microsoft-fabric-git-integration",
     "title": "Git Integration Fabric : Versionner ses artefacts, stratégie de branches",
     "url": "https://blog.antoinewang-tech.com/p/microsoft-fabric-git-integration"
+  },
+  "2026-09-08_microsoft-fabric-copilot-in-powerbi-desktop-prep-data-for-ai.md": {
+    "author": "Antoine Wang",
+    "date": "2026-09-08",
+    "slug": "microsoft-fabric-copilot-in-powerbi-desktop-prep-data-for-ai",
+    "title": "Microsoft Fabric : Bonnes pratiques pour optimiser Copilot dans Power BI (Prep Data for AI)",
+    "url": "https://blog.antoinewang-tech.com/p/microsoft-fabric-copilot-in-powerbi-desktop-prep-data-for-ai"
   }
 }

@@ -215,6 +215,16 @@ html, body, .stApp {{
     line-height: 1.4;
     font-weight: 400;
 }}
+[data-testid="stButton"] > button > div {{
+    width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}}
+[data-testid="stButton"] > button p {{
+    white-space: normal;
+    overflow-wrap: break-word;
+}}
 [data-testid="stButton"] > button:hover {{
     border-color: rgba(103,80,164,0.45);
     box-shadow: 0 4px 14px rgba(103,80,164,0.08);

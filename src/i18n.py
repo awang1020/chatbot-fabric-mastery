@@ -63,7 +63,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "unlock_cta": "Get the code in the newsletter",
         "unlock_placeholder": "Enter the reader code to keep asking\u2026",
         "rate_limited": "You\u2019ve asked {n} questions in the last {window_min} minutes. Please wait about {retry} seconds before the next one.",
-        "visit_newsletter": "Read the newsletter",
+        "visit_newsletter": "Get the Tuesday guide",
     },
     "fr": {
         "brand": "Chatbot Fabric Mastery",
@@ -119,7 +119,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "unlock_cta": "Obtenir le code dans la newsletter",
         "unlock_placeholder": "Saisissez le code lecteur pour continuer\u2026",
         "rate_limited": "Vous avez pos\u00e9 {n}\u00a0questions ces {window_min}\u00a0minutes. Patientez environ {retry}\u00a0secondes avant la prochaine.",
-        "visit_newsletter": "Lire la newsletter",
+        "visit_newsletter": "Recevoir le guide du mardi",
     },
 }
 

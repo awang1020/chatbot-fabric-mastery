@@ -32,7 +32,7 @@ from src.safety import (
     unlock_form,
 )
 
-NEWSLETTER_URL = "https://blog.antoinewang-tech.com/"
+NEWSLETTER_URL = "https://blog.antoinewang-tech.com/subscribe?utm_source=chatbot&utm_medium=referral&utm_campaign=onboarding"
 LOGO_PATH = Path(__file__).parent / "assets" / "logo_substack.webp"
 
 # Only render Python tracebacks in the UI when explicitly enabled — otherwise

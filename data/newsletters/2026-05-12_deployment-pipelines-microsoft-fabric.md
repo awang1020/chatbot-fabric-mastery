@@ -1,12 +1,12 @@
 ---
-title: Du PoC à la Production : Guide pratique des pipelines de déploiement
+title: Microsoft Fabric : Comment gérer les pipelines de déploiement ?
 url: https://blog.antoinewang-tech.com/p/deployment-pipelines-microsoft-fabric
 date: 2026-05-12
 author: Antoine Wang
 source: substack
 ---
 
-# Du PoC à la Production : Guide pratique des pipelines de déploiement
+# Microsoft Fabric : Comment gérer les pipelines de déploiement ?
 
 Bonjour à tous, je suis **Antoine Wang**.
 
@@ -61,7 +61,7 @@ Le but est de propager vos développements d’une étape à la suivante. Le fon
 * Les permissions : Les droits d’accès définis sur le workspace de PROD ne sont pas écrasés par ceux de DEV. Chaque environnement conserve sa propre gouvernance et sa sécurité.
 * Les paramètres du *workspace* et les signets personnels (*bookmarks*).
 
-💡 **Tips :** Pour éviter de modifier manuellement vos sources de données lors du passage de DEV à PROD, Fabric permet de configurer des règles de déploiement et de s'appuyer sur une *Variables Library*. Ainsi, votre pipeline sait automatiquement qu’il doit pointer vers la base de données de production une fois l’étape franchie.
+💡 **Tips :** Pour éviter de modifier manuellement vos sources de données lors du passage de DEV à PROD, Fabric permet de configurer des règles de déploiement et de s'appuyer sur une *Variable Library*. Ainsi, votre pipeline sait automatiquement qu’il doit pointer vers la base de données de production une fois l’étape franchie.
 
 ---
 
@@ -71,7 +71,7 @@ Le but est de propager vos développements d’une étape à la suivante. Le fon
 
 Avant chaque déploiement, Fabric affiche côte à côte le code source (DEV) et le code cible (PROD), avec les lignes modifiées en rouge et les ajouts en vert.
 
-✅ **La Variable Library est votre meilleur allié pour gérer les ID des éléments.**
+✅ **La [Variable Library](https://antoinewang.substack.com/p/variable-library-microsoft-fabric) est votre meilleur allié pour gérer les ID des éléments.**
 
 C’est un item Fabric qui centralise les paramètres au niveau du workspace (chaînes de connexion, noms de sources…) avec plusieurs jeux de valeurs selon l’environnement.
 

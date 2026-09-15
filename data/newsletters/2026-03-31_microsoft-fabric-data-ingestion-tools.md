@@ -1,12 +1,12 @@
 ---
-title: Microsoft Fabric : Maîtriser l'Écosystème d'Ingestion et d'Orchestration, du Low-Code au Big Data
+title: Ingestion Microsoft Fabric : Dataflow, Pipeline ou Notebook ? Guide complet 2026
 url: https://blog.antoinewang-tech.com/p/microsoft-fabric-data-ingestion-tools
 date: 2026-03-31
 author: Antoine Wang
 source: substack
 ---
 
-# Microsoft Fabric : Maîtriser l'Écosystème d'Ingestion et d'Orchestration, du Low-Code au Big Data
+# Ingestion Microsoft Fabric : Dataflow, Pipeline ou Notebook ? Guide complet 2026
 
 Bonjour à tous, je suis **Antoine Wang**.
 

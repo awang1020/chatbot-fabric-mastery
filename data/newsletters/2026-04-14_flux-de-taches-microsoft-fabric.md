@@ -1,12 +1,12 @@
 ---
-title: Du chaos au canevas : Reprenez le contrôle visuel de vos projets Data
+title: Microsoft Fabric : Comment utiliser les Task Flows dans nos projets data ?
 url: https://blog.antoinewang-tech.com/p/flux-de-taches-microsoft-fabric
 date: 2026-04-14
 author: Antoine Wang
 source: substack
 ---
 
-# Du chaos au canevas : Reprenez le contrôle visuel de vos projets Data
+# Microsoft Fabric : Comment utiliser les Task Flows dans nos projets data ?
 
 Bonjour à tous, je suis **Antoine Wang**.
 

@@ -1,12 +1,12 @@
 ---
-title: Sécurité des données : Pourquoi vous ne pouvez plus la traiter en fin de projet
+title: RLS, CLS, OLS Microsoft Fabric : le guide sécurité des données 2026
 url: https://blog.antoinewang-tech.com/p/securite-microsoft-fabric
 date: 2026-05-26
 author: Antoine Wang
 source: substack
 ---
 
-# Sécurité des données : Pourquoi vous ne pouvez plus la traiter en fin de projet
+# RLS, CLS, OLS Microsoft Fabric : le guide sécurité des données 2026
 
 Bonjour à tous, je suis **Antoine Wang**.
 

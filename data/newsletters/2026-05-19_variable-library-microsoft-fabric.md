@@ -1,12 +1,12 @@
 ---
-title: Variable Library : Centralisez vos paramètres pour un déploiement sans faille
+title: Microsoft Fabric : Configuration et Bonnes Pratiques des Variable Library
 url: https://blog.antoinewang-tech.com/p/variable-library-microsoft-fabric
 date: 2026-05-19
 author: Antoine Wang
 source: substack
 ---
 
-# Variable Library : Centralisez vos paramètres pour un déploiement sans faille
+# Microsoft Fabric : Configuration et Bonnes Pratiques des Variable Library
 
 Bonjour à tous, je suis **Antoine Wang**.
 
@@ -49,7 +49,7 @@ L’idée est simple :
 2. vous créez plusieurs jeux de valeurs (value sets) correspondant à vos environnements (DEV, TEST, PROD),
 3. et vous **activez** le jeu approprié selon l’environnement.
 
-Quand vous exécutez le Deployment Pipeline, cela propage vos items entre différents environnements, et la Variable Library voyage avec eux et vous n’avez plus qu’à activer le bon jeu de valeurs dans le workspace cible !
+Quand vous exécutez le [Deployment Pipeline](https://antoinewang.substack.com/p/deployment-pipelines-microsoft-fabric), cela propage vos items entre différents environnements, et la Variable Library voyage avec eux et vous n’avez plus qu’à activer le bon jeu de valeurs dans le workspace cible !
 
 ---
 

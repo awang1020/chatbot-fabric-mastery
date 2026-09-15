@@ -1,12 +1,12 @@
 ---
-title: Microsoft Fabric : Copilot Capacity
+title: Fabric Copilot Capacity (FCC) : le guide 2026 pour activer Copilot sans throttling
 url: https://blog.antoinewang-tech.com/p/fabric-copilot-capacity-dedicated
 date: 2026-07-14
 author: Antoine Wang
 source: substack
 ---
 
-# Microsoft Fabric : Copilot Capacity
+# Fabric Copilot Capacity (FCC) : le guide 2026 pour activer Copilot sans throttling
 
 Bonjour à tous, je suis **Antoine Wang**.
 
@@ -17,7 +17,7 @@ Mon objectif ? Vulgariser le complexe et vous donner les clés pour maîtriser M
 🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 28 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
 
 👉 **Testez-le maintenant** : [ask-fabric-mastery](http://awang1020.github.io/ask-fabric-mastery)  
-🔑 Code d’accès : `fabric-mastery-2026`
+🔑 **Code d’accès (ce code est réservé aux abonnés Fabric Mastery) :**
 
 Cette newsletter est 100% gratuite. En vous abonnant maintenant, vous recevrez en exclusivité mon “One-Pager” pour cartographier l’ensemble de la solution Fabric en un coup d’œil.
 
@@ -45,7 +45,7 @@ Depuis avril 2025, cette fonctionnalité est accessible à partir d’une capaci
 
 ---
 
-## 1. Le problème que FCC résout concrètement
+## **1️⃣** Le problème que FCC résout concrètement
 
 Historiquement, pour qu’un utilisateur Power BI accède à Copilot, il fallait que son workspace soit hébergé sur une capacité Premium (P1 ou supérieur, ou F64 minimum).
 
@@ -57,7 +57,7 @@ Vos utilisateurs gardent leurs workspaces Pro. Vous leur donnez accès à Copilo
 
 ---
 
-## 2. Les scénarios couverts
+## 2️⃣ Les scénarios couverts
 
 Une fois un utilisateur assigné à une Fabric Copilot Capacity, sa consommation Copilot est facturée sur cette capacité dédiée dans ces cas précis :
 
@@ -70,7 +70,7 @@ Une fois un utilisateur assigné à une Fabric Copilot Capacity, sa consommation
 
 ---
 
-## 3. Le modèle de coût qui change tout
+## 3️⃣ Le modèle de coût qui change tout
 
 Cela signifie que si vous êtes sur une licence Pro ou PPU, vous pouvez activer Copilot pour votre organisation pour moins de 300 dollars par mois en démarrant une F2 et en la désignant comme Fabric Copilot Capacity dédiée.
 
@@ -127,6 +127,14 @@ La **Fabric Capacity Metrics App** reste votre meilleur allié une fois la FCC e
 > Et vous, comment avez-vous structuré l’accès Copilot dans votre organisation ? Répondez simplement à cet email ou ce post, je lis tous vos messages.
 
 À la semaine prochaine pour continuer à explorer ensemble les entrailles de Fabric !
+
+---
+
+## 🔗 À lire dans Fabric Mastery
+
+* [Fabric Data Agent vs Copilot : les 3 différences qui comptent en 2026](https://blog.antoinewang-tech.com/p/microsoft-fabric-data-agent-copilot)
+* [Microsoft Fabric : Comment surveiller votre capacité comme un Pro ?](https://blog.antoinewang-tech.com/p/capacity-metrics-fabric)
+* [Power BI : Fini la page blanche avec Copilot](https://blog.antoinewang-tech.com/p/microsoft-fabric-copilot-powerbi)
 
 ---
 

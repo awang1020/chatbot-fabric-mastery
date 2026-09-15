@@ -12,7 +12,7 @@ Avez-vous l’impression que chaque annonce Microsoft génère plus de stress qu
 
 Bienvenue dans cette 3ème édition des nouveautés de Microsoft Fabric.
 
-Ce mois de mars 2026 marque un tournant dans la gestion de l’infrastructure Fabric, accentué par un événement incontournable : la tenue conjointe de la FabCon et de la SQLCon 2026 cette semaine à Atlanta. (D’ailleurs, j’ai publié [un post complet](https://blog.antoinewang-tech.com/p/fabcon-and-sqlcon-2026) à ce sujet si vous souhaitez en savoir plus).
+Ce mois de mars 2026 marque un tournant dans la gestion de l’infrastructure Fabric, accentué par un événement incontournable : la tenue conjointe de la FabCon et de la SQLCon 2026 cette semaine à Atlanta. (D’ailleurs, j’ai publié [un post complet](https://antoinewang.substack.com/p/fabcon-and-sqlcon-2026) à ce sujet si vous souhaitez en savoir plus).
 
 Mon objectif aujourd’hui n’est donc pas de vous lister toutes les features du mois, mais de me concentrer sur 3 fonctionnalités qui vont avoir un impact immédiat sur la stabilité de vos déploiements. C’est parti !
 

@@ -17,7 +17,7 @@ Mon objectif ? Vulgariser le complexe et vous donner les clés pour maîtriser M
 🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 29 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
 
 👉 **Testez-le maintenant** : [ask-fabric-mastery](http://awang1020.github.io/ask-fabric-mastery)  
-🔑 Code d’accès : `fabric-mastery-2026`
+🔑 **Code d’accès (ce code est réservé aux abonnés Fabric Mastery) :**
 
 Cette newsletter est 100% gratuite. En vous abonnant maintenant, vous recevrez en exclusivité mon “One-Pager” pour cartographier l’ensemble de la solution Fabric en un coup d’œil.
 
@@ -134,6 +134,15 @@ Concrètement : connais tes guardrails de SKU avant de partir en prod, mesure te
 > Et vous, avez-vous déjà rencontré des fallbacks DirectQuery inattendus sur vos rapports Direct Lake ? Répondez simplement à cet email ou ce post, je lis tous vos messages.
 
 À la semaine prochaine pour continuer à explorer ensemble les entrailles de Fabric !
+
+---
+
+## 🔗 À lire dans Fabric Mastery
+
+* [Architecture Médaillon Microsoft Fabric : Bronze, Silver, Gold expliqués](https://blog.antoinewang-tech.com/p/architecture-medaillon-microsoft-fabric)
+* [Data Stores Microsoft Fabric : Lakehouse vs Warehouse vs KQL](https://blog.antoinewang-tech.com/p/data-stores-microsoft-fabric-comparatif)
+* [Microsoft Fabric : Tout savoir sur le OneLake](https://blog.antoinewang-tech.com/p/onelake-microsoft-fabric-guide)
+* [Ingestion Microsoft Fabric : Dataflow, Pipeline ou Notebook ?](https://blog.antoinewang-tech.com/p/microsoft-fabric-data-ingestion-tools)
 
 ---
 

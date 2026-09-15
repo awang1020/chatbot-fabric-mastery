@@ -1,12 +1,12 @@
 ---
-title: Piloter votre capacité Fabric comme un Pro
+title: Microsoft Fabric : Comment surveiller votre capacité comme un Pro ?
 url: https://blog.antoinewang-tech.com/p/capacity-metrics-fabric
 date: 2026-02-24
 author: Antoine Wang
 source: substack
 ---
 
-# Piloter votre capacité Fabric comme un Pro
+# Microsoft Fabric : Comment surveiller votre capacité comme un Pro ?
 
 Vous avez sauté le pas, votre organisation est sur **Microsoft Fabric**. C’est génial, la puissance est là. Mais soudain, une question vous brûle les lèvres : *« Est-ce que je consomme trop ? Pourquoi mes rapports rament cet après-midi ? »*
 

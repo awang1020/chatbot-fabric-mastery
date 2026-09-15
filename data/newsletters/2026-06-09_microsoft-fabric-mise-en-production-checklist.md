@@ -29,7 +29,7 @@ Gardez cette liste. Elle vous évitera des nuits d’astreinte.
 
 ### ✅ Point 1 : Architecture ! Votre architecture médaillon est-elle un contrat organisationnel, pas juste un nommage ?
 
-*→ **Post de référence** : [Architecture Medallion dans Fabric](https://blog.antoinewang-tech.com/p/architecture-medaillon-microsoft-fabric)*
+*→ **Post de référence** : [Architecture Medallion dans Fabric](https://antoinewang.substack.com/p/architecture-medaillon-microsoft-fabric)*
 
 Bronze, Silver, Gold : trois lakehouses bien nommées ne font pas une Medallion.
 

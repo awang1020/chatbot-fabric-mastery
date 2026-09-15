@@ -250,5 +250,19 @@
     "slug": "microsoft-fabric-copilot-in-powerbi-desktop-prep-data-for-ai",
     "title": "Microsoft Fabric : Bonnes pratiques pour optimiser Copilot dans Power BI (Prep Data for AI)",
     "url": "https://blog.antoinewang-tech.com/p/microsoft-fabric-copilot-in-powerbi-desktop-prep-data-for-ai"
+  },
+  "2026-09-09_commencer-microsoft-fabric.md": {
+    "author": "Antoine Wang",
+    "date": "2026-09-09",
+    "slug": "commencer-microsoft-fabric",
+    "title": "Commencer avec Microsoft Fabric : le parcours essentiel",
+    "url": "https://blog.antoinewang-tech.com/p/commencer-microsoft-fabric"
+  },
+  "2026-09-15_maintenance-table-delta-lakehouse-fabric.md": {
+    "author": "Antoine Wang",
+    "date": "2026-09-15",
+    "slug": "maintenance-table-delta-lakehouse-fabric",
+    "title": "Maintenance table Delta Fabric : Comment optimiser le storage ?",
+    "url": "https://blog.antoinewang-tech.com/p/maintenance-table-delta-lakehouse-fabric"
   }
 }

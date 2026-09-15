@@ -1,12 +1,12 @@
 ---
-title: 3 étapes pour connecter une source privée à Fabric sans exposer vos données sur internet
+title: Microsoft Fabric & VNet : Le Guide Sécurité Data Gateway
 url: https://blog.antoinewang-tech.com/p/vnet-data-gateway-microsoft-fabric
 date: 2026-06-30
 author: Antoine Wang
 source: substack
 ---
 
-# 3 étapes pour connecter une source privée à Fabric sans exposer vos données sur internet
+# Microsoft Fabric & VNet : Le Guide Sécurité Data Gateway
 
 Bonjour à tous, je suis **Antoine Wang**.
 
@@ -14,10 +14,10 @@ J’aide les profils techniques à maîtriser l’architecture de Microsoft Fabr
 
 Mon objectif ? Vulgariser le complexe et vous donner les clés pour maîtriser Microsoft Fabric, une plateforme de données SaaS unifiée et alimentée par l’IA pour simplifier la gestion des données et l’analyse.
 
-🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 23 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
+🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 25 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
 
 👉 **Testez-le maintenant** : [ask-fabric-mastery](http://awang1020.github.io/ask-fabric-mastery)  
-🔑 Code d’accès : `fabric-mastery-2026`
+🔑 **Code d’accès (ce code est réservé aux abonnés Fabric Mastery) :**
 
 Cette newsletter est 100% gratuite. En vous abonnant maintenant, vous recevrez en exclusivité mon “One-Pager” pour cartographier l’ensemble de la solution Fabric en un coup d’œil.
 
@@ -160,6 +160,13 @@ L’impact terrain est immédiat : vos données ne transitent plus par l’inter
 > Et vous, quelle est votre configuration actuelle pour atteindre vos sources privées dans Fabric ?
 
 À la semaine prochaine pour continuer à explorer ensemble les entrailles de Fabric !
+
+---
+
+## 🔗 À lire dans Fabric Mastery
+
+* [Sécuriser les connexions Microsoft Fabric : bonnes pratiques et service principal](https://blog.antoinewang-tech.com/p/secure-connexion-source-microsoft-fabric)
+* [RLS, CLS, OLS Microsoft Fabric : le guide sécurité des données 2026](https://blog.antoinewang-tech.com/p/securite-microsoft-fabric)
 
 ---
 

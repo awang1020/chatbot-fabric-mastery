@@ -1,12 +1,12 @@
 ---
-title: Arrêtez de transformer votre OneLake en marécage : L'architecture Medaillon
+title: Architecture Médaillon Microsoft Fabric : Bronze, Silver, Gold expliqués
 url: https://blog.antoinewang-tech.com/p/architecture-medaillon-microsoft-fabric
 date: 2026-04-21
 author: Antoine Wang
 source: substack
 ---
 
-# Arrêtez de transformer votre OneLake en marécage : L'architecture Medaillon
+# Architecture Médaillon Microsoft Fabric : Bronze, Silver, Gold expliqués
 
 Bonjour à tous, je suis **Antoine Wang**.
 
@@ -133,6 +133,15 @@ C’est ce socle qui permet aux analystes de se concentrer sur la valorisation d
 > Et vous, quelle est votre expérience avec l’architecture Medallion ? Répondez simplement à cet email ou ce post, je lis tous vos messages.
 
 À la semaine prochaine pour continuer à explorer ensemble les entrailles de Fabric !
+
+---
+
+## 🔗 À lire dans Fabric Mastery
+
+* [Data Stores Microsoft Fabric : Lakehouse vs Warehouse vs KQL](https://blog.antoinewang-tech.com/p/data-stores-microsoft-fabric-comparatif)
+* [Ingestion Microsoft Fabric : Dataflow, Pipeline ou Notebook ?](https://blog.antoinewang-tech.com/p/microsoft-fabric-data-ingestion-tools)
+* [Microsoft Fabric : Tout savoir sur le OneLake](https://blog.antoinewang-tech.com/p/onelake-microsoft-fabric-guide)
+* [Microsoft Fabric : Gouvernance des workspaces](https://blog.antoinewang-tech.com/p/gouvernance-workspaces-microsoft-fabric)
 
 ---
 

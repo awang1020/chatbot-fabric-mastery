@@ -1,12 +1,12 @@
 ---
-title: Microsoft Fabric : Data Agent vs Copilot
+title: Fabric Data Agent vs Copilot : les 3 différences qui comptent en 2026
 url: https://blog.antoinewang-tech.com/p/microsoft-fabric-data-agent-copilot
 date: 2026-07-07
 author: Antoine Wang
 source: substack
 ---
 
-# Microsoft Fabric : Data Agent vs Copilot
+# Fabric Data Agent vs Copilot : les 3 différences qui comptent en 2026
 
 Bonjour à tous, je suis Antoine Wang.
 
@@ -17,7 +17,7 @@ Mon objectif ? Vulgariser le complexe et vous donner les clés pour maîtriser M
 🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 27 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
 
 👉 **Testez-le maintenant** : [ask-fabric-mastery](http://awang1020.github.io/ask-fabric-mastery)  
-🔑 Code d’accès : `fabric-mastery-2026`
+🔑 **Code d’accès (ce code est réservé aux abonnés Fabric Mastery) :**
 
 Cette newsletter est 100% gratuite. En vous abonnant maintenant, vous recevrez en exclusivité mon “One-Pager” pour cartographier l’ensemble de la solution Fabric en un coup d’œil.
 
@@ -47,7 +47,7 @@ Let’s go !
 
 Posons le cadre simplement. Copilot et Data Agent reposent sur des LLM (Azure OpenAI) et savent tous les deux répondre en langage naturel. Ce qui les sépare, c’est le niveau de configuration et le rôle :
 
-* **Copilot dans Fabric & Power BI** est un assistant IA intégré nativement dans toute l’expérience : partout où apparaît l’icône Copilot ([Dataflow gen2](https://blog.antoinewang-tech.com/p/copilot-data-flow-gen2-microsoft-fabric), [Power BI](https://blog.antoinewang-tech.com/p/microsoft-fabric-copilot-powerbi), notebooks, …), vous dialoguez en langage naturel. Préconfiguré et prêt à l’emploi, il aide à créer des visuels et des pages de rapport, écrire et expliquer du DAX ou du SQL, résumer des insights et générer des narratifs, et accélérer les transformations de données. Il travaille dans le contexte Fabric actif, avec mémoire conversationnelle et portée à l’échelle du workspace.
+* **Copilot dans Fabric & Power BI** est un assistant IA intégré nativement dans toute l’expérience : partout où apparaît l’icône Copilot ([Dataflow gen2](https://antoinewang.substack.com/p/copilot-data-flow-gen2-microsoft-fabric), [Power BI](https://antoinewang.substack.com/p/microsoft-fabric-copilot-powerbi), notebooks, …), vous dialoguez en langage naturel. Préconfiguré et prêt à l’emploi, il aide à créer des visuels et des pages de rapport, écrire et expliquer du DAX ou du SQL, résumer des insights et générer des narratifs, et accélérer les transformations de données. Il travaille dans le contexte Fabric actif, avec mémoire conversationnelle et portée à l’échelle du workspace.
 * Un **Data Agent** est un artefact Fabric que vous créez dans un workspace et publiez, exactement comme un rapport Power BI. C’est un agent conversationnel d’analyse (text-to-query) : agentique dans son fonctionnement interne (il choisit la source, invoque l’outil, génère, valide et exécute la requête) mais strictement cantonné à la lecture (aucune écriture ni action sur les systèmes). On spécifie des instructions, des exemples et jusqu'à cinq sources choisies en sélectionnant les tables pertinentes.
 
 La distinction tient en une phrase : Copilot est l’assistant généraliste prêt à l’emploi ; le Data Agent est l’expert gouverné que vous façonnez et diffusez.
@@ -141,6 +141,14 @@ L’impact terrain : en posant la bonne question “ai-je besoin d’un assistan
 > Et vous, où en êtes-vous ? Vos métiers se contentent-ils du Copilot généraliste dans Power BI, ou avez-vous déjà construit des Data Agents spécialisés pour vos besoins ? Répondez simplement à cet email ou ce post, je lis tous vos messages.
 
 À la semaine prochaine pour continuer à explorer ensemble les entrailles de Fabric !
+
+---
+
+## 🔗 À lire dans Fabric Mastery
+
+* [Fabric Copilot Capacity (FCC) : le guide 2026 sans throttling](https://blog.antoinewang-tech.com/p/fabric-copilot-capacity-dedicated)
+* [Power BI : Fini la page blanche avec Copilot](https://blog.antoinewang-tech.com/p/microsoft-fabric-copilot-powerbi)
+* [Copilot Dataflow Gen2 Fabric : guide pratique et cas d’usage](https://blog.antoinewang-tech.com/p/copilot-dataflow-gen2-microsoft-fabric)
 
 ---
 

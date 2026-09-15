@@ -1,12 +1,12 @@
 ---
-title: Rayfin + Fabric Apps : de l'idée à une app testable par vos équipes
+title: Microsoft Fabric : Comment utiliser Rayfin et les Apps ? (+démo)
 url: https://blog.antoinewang-tech.com/p/rayfin-fabric-apps-demo
 date: 2026-06-23
 author: Antoine Wang
 source: substack
 ---
 
-# Rayfin + Fabric Apps : de l'idée à une app testable par vos équipes
+# Microsoft Fabric : Comment utiliser Rayfin et les Apps ? (+démo)
 
 Bonjour à tous, je suis Antoine Wang.
 
@@ -14,10 +14,10 @@ J’aide les profils techniques à maîtriser l’architecture de Microsoft Fabr
 
 Mon objectif ? Vulgariser le complexe et vous donner les clés pour maîtriser Microsoft Fabric, une plateforme de données SaaS unifiée et alimentée par l’IA pour simplifier la gestion des données et l’analyse.
 
-🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 23 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
+🆕 **Nouveauté pour les lecteurs** : j’ai créé **Ask Fabric Mastery**, un assistant IA qui répond à vos questions sur Microsoft Fabric & Power BI en s’appuyant uniquement sur les 24 éditions de cette newsletter. Réponses sourcées, sans hallucination, avec un lien direct vers l’édition d’origine.
 
 👉 **Testez-le maintenant** : [ask-fabric-mastery](http://awang1020.github.io/ask-fabric-mastery)  
-🔑 Code d’accès : `fabric-mastery-2026`
+🔑 **Code d’accès (ce code est réservé aux abonnés Fabric Mastery) :**
 
 Cette newsletter est 100% gratuite. En vous abonnant maintenant, vous recevrez en exclusivité mon “One-Pager” pour cartographier l’ensemble de la solution Fabric en un coup d’oeil.
 
@@ -119,6 +119,13 @@ Et oui, les profils métier peuvent s’en servir en mode “vibe coding” pour
 À la semaine prochaine pour continuer à explorer ensemble les entrailles de Fabric !
 
 ---
+
+## 🔗 À lire dans Fabric Mastery
+
+* [Migration Power BI Premium → Microsoft Fabric](https://blog.antoinewang-tech.com/p/migration-power-bi-premium-to-fabric)
+* [Microsoft Fabric : Révolution ou simple rebranding ?](https://blog.antoinewang-tech.com/p/microsoft-fabric-revolution-ou-rebranding)
+
+  ---
 
 ## 📚 Ressources pour aller plus loin
 

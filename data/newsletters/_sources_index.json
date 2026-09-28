@@ -264,5 +264,12 @@
     "slug": "maintenance-table-delta-lakehouse-fabric",
     "title": "Maintenance table Delta Fabric : Comment optimiser le storage ?",
     "url": "https://blog.antoinewang-tech.com/p/maintenance-table-delta-lakehouse-fabric"
+  },
+  "2026-09-22_fabric-chargeback-vs-capacity-metrics.md": {
+    "author": "Antoine Wang",
+    "date": "2026-09-22",
+    "slug": "fabric-chargeback-vs-capacity-metrics",
+    "title": "Fabric Chargeback vs Capacity Metrics : refacturer les CU",
+    "url": "https://blog.antoinewang-tech.com/p/fabric-chargeback-vs-capacity-metrics"
   }
 }

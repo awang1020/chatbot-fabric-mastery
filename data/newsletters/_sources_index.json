@@ -271,5 +271,12 @@
     "slug": "fabric-chargeback-vs-capacity-metrics",
     "title": "Fabric Chargeback vs Capacity Metrics : refacturer les CU",
     "url": "https://blog.antoinewang-tech.com/p/fabric-chargeback-vs-capacity-metrics"
+  },
+  "2026-09-29_azure-maps-conformite-ue.md": {
+    "author": "Antoine Wang",
+    "date": "2026-09-29",
+    "slug": "azure-maps-conformite-ue",
+    "title": "Azure Maps dans Power BI : vos données restent-elles en UE ?",
+    "url": "https://blog.antoinewang-tech.com/p/azure-maps-conformite-ue"
   }
 }

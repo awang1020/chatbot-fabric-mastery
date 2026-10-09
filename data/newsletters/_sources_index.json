@@ -278,5 +278,12 @@
     "slug": "azure-maps-conformite-ue",
     "title": "Azure Maps dans Power BI : vos données restent-elles en UE ?",
     "url": "https://blog.antoinewang-tech.com/p/azure-maps-conformite-ue"
+  },
+  "2026-10-06_fuam-capacity-compute-historique.md": {
+    "author": "Antoine Wang",
+    "date": "2026-10-06",
+    "slug": "fuam-capacity-compute-historique",
+    "title": "FUAM : Capacity Compute Page more than 14 day on Metrics App",
+    "url": "https://blog.antoinewang-tech.com/p/fuam-capacity-compute-historique"
   }
 }

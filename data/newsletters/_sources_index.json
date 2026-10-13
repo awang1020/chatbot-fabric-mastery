@@ -285,5 +285,12 @@
     "slug": "fuam-capacity-compute-historique",
     "title": "FUAM : Capacity Compute Page more than 14 day on Metrics App",
     "url": "https://blog.antoinewang-tech.com/p/fuam-capacity-compute-historique"
+  },
+  "2026-10-13_migration-aas-fabric.md": {
+    "author": "Antoine Wang",
+    "date": "2026-10-13",
+    "slug": "migration-aas-fabric",
+    "title": "Migration Azure Analysis Services vers Fabric : la check-list démo",
+    "url": "https://blog.antoinewang-tech.com/p/migration-aas-fabric"
   }
 }

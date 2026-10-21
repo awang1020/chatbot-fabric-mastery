@@ -292,5 +292,12 @@
     "slug": "migration-aas-fabric",
     "title": "Migration Azure Analysis Services vers Fabric : la check-list démo",
     "url": "https://blog.antoinewang-tech.com/p/migration-aas-fabric"
+  },
+  "2026-10-20_policies-microsoft-fabric.md": {
+    "author": "Antoine Wang",
+    "date": "2026-10-20",
+    "slug": "policies-microsoft-fabric",
+    "title": "Policies dans Microsoft Fabric : cibler sans tout bloquer",
+    "url": "https://blog.antoinewang-tech.com/p/policies-microsoft-fabric"
   }
 }

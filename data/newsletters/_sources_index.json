@@ -299,5 +299,12 @@
     "slug": "policies-microsoft-fabric",
     "title": "Policies dans Microsoft Fabric : cibler sans tout bloquer",
     "url": "https://blog.antoinewang-tech.com/p/policies-microsoft-fabric"
+  },
+  "2026-10-27_block-my-personal-workspace-power-bi.md": {
+    "author": "Antoine Wang",
+    "date": "2026-10-27",
+    "slug": "block-my-personal-workspace-power-bi",
+    "title": "Désactiver les workspaces Personnel Power BI : est-ce possible ?",
+    "url": "https://blog.antoinewang-tech.com/p/block-my-personal-workspace-power-bi"
   }
 }

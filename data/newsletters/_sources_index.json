@@ -306,5 +306,12 @@
     "slug": "block-my-personal-workspace-power-bi",
     "title": "Désactiver les workspaces Personnel Power BI : est-ce possible ?",
     "url": "https://blog.antoinewang-tech.com/p/block-my-personal-workspace-power-bi"
+  },
+  "2026-11-03_copilot-power-bi-compliance-security-data-residency.md": {
+    "author": "Antoine Wang",
+    "date": "2026-11-03",
+    "slug": "copilot-power-bi-compliance-security-data-residency",
+    "title": "Activer Copilot dans Power BI : où passent vos données ?",
+    "url": "https://blog.antoinewang-tech.com/p/copilot-power-bi-compliance-security-data-residency"
   }
 }

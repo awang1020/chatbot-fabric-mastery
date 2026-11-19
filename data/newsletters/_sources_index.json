@@ -320,5 +320,12 @@
     "slug": "runtime-fabric-migration",
     "title": "Runtime Fabric 1.2 : migrer vers 1.3 ou 2.0 ? (+code)",
     "url": "https://blog.antoinewang-tech.com/p/runtime-fabric-migration"
+  },
+  "2026-11-17_power-bi-avec-git-et-azure-devops-backup-versioning.md": {
+    "author": "Antoine Wang",
+    "date": "2026-11-17",
+    "slug": "power-bi-avec-git-et-azure-devops-backup-versioning",
+    "title": "Power BI avec Git et Azure DevOps : du rapport à la production",
+    "url": "https://blog.antoinewang-tech.com/p/power-bi-avec-git-et-azure-devops-backup-versioning"
   }
 }

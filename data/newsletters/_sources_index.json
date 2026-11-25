@@ -327,5 +327,12 @@
     "slug": "power-bi-avec-git-et-azure-devops-backup-versioning",
     "title": "Power BI avec Git et Azure DevOps : du rapport à la production",
     "url": "https://blog.antoinewang-tech.com/p/power-bi-avec-git-et-azure-devops-backup-versioning"
+  },
+  "2026-11-24_power-bi-suffit-il-microsoft-fabric.md": {
+    "author": "Antoine Wang",
+    "date": "2026-11-24",
+    "slug": "power-bi-suffit-il-microsoft-fabric",
+    "title": "Power BI suffit-il ? Ce que j'ai réellement compris de Microsoft Fabric",
+    "url": "https://blog.antoinewang-tech.com/p/power-bi-suffit-il-microsoft-fabric"
   }
 }
